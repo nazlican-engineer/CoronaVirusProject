@@ -1,0 +1,9 @@
+# Local data exports
+*.xlsx
+*.xls
+*.csv
+
+# Local editor and OS files
+.vscode/
+.DS_Store
+Thumbs.db
