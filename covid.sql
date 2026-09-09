@@ -38,3 +38,10 @@ from CovidDeaths
 where continent is  null
 group by location 
 order by TotalDeathContinent desc
+
+--Global Number
+select sum(new_cases) as total_cases,sum(cast(new_deaths as int)) as total_deaths,
+sum(cast(new_deaths as int))/sum(new_cases)*100 as DeathPercentage
+from CovidDeaths
+where continent is not null
+
