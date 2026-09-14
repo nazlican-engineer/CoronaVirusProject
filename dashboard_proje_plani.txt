@@ -1,0 +1,152 @@
+COVID-19 VERİ ANALİZİ VE DASHBOARD PROJE PLANI
+Teknolojiler: SQL, Python, Power BI
+Hedef: COVID-19 verilerini analiz etmek, sonuçları 7 sayfalık bir dashboard ile sunmak ve haftalık vaka/ölüm tahminlerini değerlendirmek.
+
+1. SAYFA: VAKA ANALİZİ
+Sorular:
+- Seçilen gün, hafta, ay veya yılda kaç yeni vaka bildirildi?
+- Vakalar ülkeler arasında ve zaman içinde nasıl değişti?
+Görseller:
+- Dönemlik yeni vaka ve seçilen tarihe kadar kümülatif vaka kartları.
+- Zaman çizgisi, ülke sıralaması ve harita.
+Temel sütunlar:
+new_cases, total_cases, total_cases_per_million,
+new_cases_smoothed_per_million
+
+2. SAYFA: ÖLÜM ANALİZİ
+Sorular:
+- Seçilen dönemde kaç yeni ölüm bildirildi?
+- Ülkelerin ölüm yükü ve dünya toplamındaki payları nasıl değişti?
+Görseller:
+- Dönemlik yeni ölüm ve seçilen tarihe kadar kümülatif ölüm kartları.
+- Zaman çizgisi, ülke sıralaması ve harita.
+- Seçili tarihte ülkelerin toplam ölüm içindeki payları.
+Temel sütunlar:
+new_deaths, total_deaths, total_deaths_per_million,
+new_deaths_smoothed_per_million
+
+3. SAYFA: YAYILIM VE HASTANE YÜKÜ
+Sorular:
+- R değeri zaman içinde nasıl değişti?
+- Hastanede ve yoğun bakımda kaç kişi vardı?
+Görseller:
+- R değeri çizgisi ve 1 referans çizgisi.
+- Hastane/yoğun bakım seçim düğmesi.
+- Veri kapsamı kartı.
+Temel sütunlar:
+reproduction_rate, hosp_patients, icu_patients,
+hosp_patients_per_million, icu_patients_per_million
+
+4. SAYFA: TEST ANALİZİ
+Sorular:
+- Seçilen haftada kaç test bildirildi?
+- Pozitiflik oranı nasıl değişti?
+Görseller:
+- Haftalık test kartı.
+- Pozitiflik oranı zaman çizgisi.
+- Test birimleri ve dönemleri karşılaştırılabilir ülkeler için sıralama.
+Temel sütunlar:
+new_tests, positive_rate, tests_units
+
+5. SAYFA: AŞILAMA
+Sorular:
+- Aşılanma oranı nasıl ilerledi?
+- Ülkeler arasındaki fark neydi?
+- Aşılanma ile vaka/ölüm eğrileri birlikte nasıl değişti?
+Görseller:
+- En az bir doz ve tam aşılanma oranı kartları.
+- Zaman çizgileri ve ülke karşılaştırmaları.
+- Ayrı, zaman eksenleri hizalanmış vaka/ölüm grafikleri.
+Temel sütunlar:
+people_vaccinated_per_hundred, people_fully_vaccinated_per_hundred,
+new_cases_smoothed_per_million, new_deaths_smoothed_per_million
+
+6. SAYFA: DEMOGRAFİK VE EKONOMİK İLİŞKİLER
+Sorular:
+- Yaş, gelir ve gelişmişlik göstergeleri ölüm ve aşılanma oranlarıyla nasıl ilişkili?
+Görseller:
+- GDP ile milyon kişi başına toplam ölüm dağılım grafiği.
+- İnsani gelişmişlik endeksi ile tam aşılanma oranı dağılım grafiği.
+- Yaşlı nüfus oranı ile milyon kişi başına toplam ölüm dağılım grafiği.
+- Korelasyon ısı haritası.
+- Regresyon katsayıları ve güven aralıkları.
+Temel sütunlar:
+aged_65_older, gdp_per_capita, human_development_index,
+hospital_beds_per_thousand, population_density,
+total_deaths_per_million, people_fully_vaccinated_per_hundred
+
+7. SAYFA: TAHMİN VE DEĞERLENDİRME
+Sorular:
+- Seçilen ülkenin sonraki haftasında bildirilen vaka ve ölüm sayıları nasıl değişebilir?
+- Model geçmişte ne kadar başarılıydı?
+Görseller:
+- Önceki hafta gerçekleşen, seçilen hafta gerçekleşen ve sonraki hafta tahmini kartları.
+- Beklenen haftalık değişim oranları.
+- Gerçekleşen ve tahmin edilen değerlerin zaman çizgileri.
+- Vaka ve ölüm tahminleri için ayrı MAE hata kartları.
+- Basit referans yöntemle model karşılaştırması.
+- Otomatik analiz metni.
+Temel kaynak sütunlar:
+new_cases, new_deaths
+Python'da üretilecek alanlar:
+- Haftalık vaka ve ölüm toplamları.
+- Geçmiş haftalara ait değerler.
+- Tahmin başlangıcı ve hedef hafta.
+- Vaka ve ölüm tahminleri, gerçekleşen değerler ve hata ölçüleri.
+Etkileşim:
+- Grafik tarih aralığı ile tahmin başlangıcı ayrı seçimler olacak.
+- Model, tahmin başlangıcından sonraki verileri kullanmayacak.
+- İlk sürümde uygun ülke ve haftalar için tahminler Python'da önceden hesaplanacak.
+- Sonuçlar SQL'e kaydedilecek; Power BI ülke ve hafta seçimine göre ilgili tahmini gösterecek.
+- Power BI filtresini değiştirmek Python modelini yeniden çalıştırmayacak.
+- İlk model, veri sürekliliği uygun tek bir ülkede geliştirilecek; ardından kapsam genişletilebilecek.
+- Geçmiş bir tarih başlangıç kabul edilerek sonraki haftanın tahmini gerçek değerlerle karşılaştırılacak.
+
+ORTAK ALANLAR VE TASARIM
+- Temel alanlar: iso_code, location, continent, date, population.
+- Filtreler: Sayfaya uygun ülke, kıta ve tarih/dönem seçimi.
+- Her gösterge için son gözlem tarihi ve eksik veri durumu gösterilecek.
+- Vaka ve ölüm sayfalarındaki dünya görünümü için World kayıtları ayrıca korunacak.
+- Aynı göstergeler tüm sayfalarda aynı renk ve sayı biçimiyle sunulacak.
+- Ham veri korunacak; analiz ve dashboard için ayrı tablolar hazırlanacak.
+
+HESAPLAMA VE YORUMLAMA KURALLARI
+1. Günlük/haftalık/aylık/yıllık yeni vaka ve ölüm toplamları new_cases ve new_deaths üzerinden hesaplanacak. Eksik dönemler işaretlenecek.
+2. Kümülatif toplamlar tarihler boyunca toplanmayacak. Seçilen tarihteki değer kullanılacak; son dolu değer kullanılırsa gözlem tarihi açıkça belirtilecek.
+3. Hastane ve yoğun bakım hasta sayıları tarihler boyunca toplanmayacak. Dönem için son değer veya açıkça etiketlenmiş ortalama gösterilecek.
+4. Pozitiflik, aşılanma ve milyon kişi başına oranlar doğrudan toplanmayacak. Dönem ve coğrafya bazındaki hesaplama kuralları ayrıca belirlenecek.
+5. Eksik veri sıfır olarak yorumlanmayacak. Raporlama kontrolü her göstergenin kendi sütununa göre yapılacak.
+6. Ülke düzeyindeki ilişkiler nedensel etki veya kişisel aşı etkinliği olarak sunulmayacak.
+7. Tahmin hedefi bildirilen yeni vaka ve ölüm sayıları olacak; kesin sonuç gibi sunulmayacak.
+8. Model zaman sıralı biçimde değerlendirilecek; gelecekteki bilgiler eğitim verisine sızdırılmayacak.
+9. Model, gelecek haftayı bu haftayla aynı kabul eden basit referans yöntemle karşılaştırılacak.
+10. Ülke, kıta ve dünya toplamları aynı toplama dahil edilerek çift sayım yapılmayacak.
+
+SQL, PYTHON VE POWER BI İŞ BÖLÜMÜ
+SQL:
+- Ülke, tarih ve günlük kayıt tablolarının hazırlanması.
+- Tekrar kayıt ve eksik veri kontrolleri.
+- Haftalık özetler, dönem değişimleri ve analiz görünümleri.
+- Python tahmin sonuçlarının saklanması.
+Python:
+- Veri keşfi, temizleme kararları ve görsel analizler.
+- Korelasyon ve regresyon analizleri.
+- Tahmin girdilerinin hazırlanması, model kurulması ve değerlendirilmesi.
+Power BI:
+- Sayfalar, filtreler, göstergeler ve etkileşimli görseller.
+- SQL'deki analiz ve tahmin tablolarının raporlanması.
+
+PYTHON'DA SONRAKİ ÇALIŞMA SIRASI
+1. Notebook'un baştan sona çalışmasını engelleyen hataları düzeltmek.
+2. Bu plana göre key_columns listesini düzenlemek.
+3. Tarih, tekrar kayıt, eksik veri ve ülke bazında veri kapsamını kontrol etmek.
+4. Vaka ve ölüm analizleri için günlük/haftalık tabloları hazırlamak.
+5. Diğer sayfaların analizlerini tamamlamak.
+6. Verisi uygun bir ülkede tahmin modelini kurup geçmiş dönemlerde değerlendirmek.
+
+KAPSAM VE ÖNCELİK
+- Hedef süre: 20 gün.
+- Öncelik: Çalışan SQL -> Python -> Power BI akışını kurmak.
+- Önce vaka, ölüm ve aşılama sayfalarının ortak tasarımı oluşturulacak.
+- Diğer analiz sayfaları veri kapsamına göre tamamlanacak.
+- Tahmin için veri hazırlığı erken başlayacak; ilk model tek ülke ve bir hafta ilerisiyle sınırlı tutulacak.
