@@ -10,3 +10,14 @@ Cells were copied from `covid_analysis.ipynb` without changing their source code
 - `05_vaccination_analysis.ipynb`: original cells 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 173, 174, 175, 176, 177
 - `06_demographic_economic_analysis.ipynb`: original cells 136, 137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216
 - `07_forecasting.ipynb`: placeholder; the original notebook has no forecasting cells yet.
+
+## Copied explanatory cells
+
+The following descriptive cells were copied from `data_audit_cleaning.ipynb` without modifying their source:
+
+- `cases_analysis.ipynb`: case/death definitions
+- `deaths_analysis.ipynb`: case/death definitions and excess-mortality definitions
+- `spread_hospital_analysis.ipynb`: spread/hospital definitions and policy/demographic field definitions
+- `testing_analysis.ipynb`: testing definitions
+- `vaccination_analysis.ipynb`: vaccination definitions
+- `demographic_economic_analysis.ipynb`: policy/demographic field definitions
