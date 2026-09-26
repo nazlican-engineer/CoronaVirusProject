@@ -1,4 +1,5 @@
 # Local data exports
+/data/
 *.xlsx
 *.xls
 *.csv
