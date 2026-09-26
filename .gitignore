@@ -1,5 +1,6 @@
 # Local data exports
 /data/
+/dashboard/
 *.xlsx
 *.xls
 *.csv
