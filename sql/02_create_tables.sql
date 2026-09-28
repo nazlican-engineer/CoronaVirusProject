@@ -143,3 +143,16 @@ CREATE TABLE IF NOT EXISTS covid.weekly_tests (
     hafta_sonu DATE,
     PRIMARY KEY (location, hafta_baslangici)
 );
+-- Python analizinde her hafta icin son gecerli asi oranini tutar.
+-- Asilamada yedi gunun tamamini istemiyoruz; haftadaki en guncel gecerli gozlem kullanilir.
+CREATE TABLE IF NOT EXISTS covid.weekly_vaccinations (
+    location TEXT NOT NULL,
+    hafta_baslangici DATE NOT NULL,
+    hafta_sonu DATE,
+    gozlem_tarihi DATE,
+    people_vaccinated_per_hundred DOUBLE PRECISION,
+    people_fully_vaccinated_per_hundred DOUBLE PRECISION,
+    gozlem_gecikmesi_gun INTEGER,
+    veri_durumu TEXT,
+    PRIMARY KEY (location, hafta_baslangici)
+);

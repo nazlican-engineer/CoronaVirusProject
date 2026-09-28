@@ -1,0 +1,8 @@
+README.md
+pyproject.toml
+coronavirus_project.egg-info/PKG-INFO
+coronavirus_project.egg-info/SOURCES.txt
+coronavirus_project.egg-info/dependency_links.txt
+coronavirus_project.egg-info/top_level.txt
+src/__init__.py
+src/data_loader.py
