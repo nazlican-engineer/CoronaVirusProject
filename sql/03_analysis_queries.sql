@@ -14,6 +14,10 @@ FROM covid.weekly_cases;
 SELECT COUNT(*) AS kayit_sayisi
 FROM covid.weekly_deaths;
 
+-- Aktarilan haftalik asi kaydi sayisini kontrol ediyoruz.
+SELECT COUNT(*) AS kayit_sayisi
+FROM covid.weekly_vaccinations;
+
 -- Aktarılan haftalık test kaydı sayısını kontrol ediyoruz.
 SELECT COUNT(*) AS kayit_sayisi
 FROM covid.weekly_tests;
@@ -870,7 +874,129 @@ FROM asi_anlik_gorunumu
 GROUP BY asi_grubu
 ORDER BY ortalama_tam_asi_orani_yuzde DESC;
 
+--6 Eylül 2021 haftasında ülkeleri tam aşılama oranına göre grupluyoruz.
+-- Bu hafta, aşı verisi bulunan ülke sayısının en yüksek olduğu haftalardan biridir.
+WITH asi_anlik_gorunumu AS (
+    SELECT
+        location,
 
+        -- Tam aşı oranına göre üç grup oluşturuyoruz.
+        CASE
+            WHEN people_fully_vaccinated_per_hundred >= 70
+                THEN 'Yuksek asi kapsami (%70 ve uzeri)'
+
+            WHEN people_fully_vaccinated_per_hundred >= 40
+                THEN 'Orta asi kapsami (%40 - %69,99)'
+
+            ELSE 'Dusuk asi kapsami (%40 alti)'
+        END AS asi_grubu
+
+    FROM covid.weekly_vaccinations
+
+    -- Her ülke için aynı zaman noktasını kullanıyoruz.
+    WHERE hafta_baslangici = DATE '2021-09-06'
+
+      -- O haftada ülkenin son geçerli aşı gözlemini kullanıyoruz.
+      AND veri_durumu = 'Haftadaki son geçerli gözlem'
+
+      -- Tam aşı oranı olmayan ülkeleri karşılaştırmaya almıyoruz.
+      AND people_fully_vaccinated_per_hundred IS NOT NULL
+),
+
+--Oluşan aşı gruplarının sonraki 12 haftadaki ölüm kayıtlarını alıyoruz.
+oniki_hafta_olum AS (
+    SELECT
+        a.asi_grubu,
+        wd.location,
+        wd.hafta_baslangici,
+        wd.haftalik_olum_milyon_basina
+
+    FROM asi_anlik_gorunumu a
+
+    -- Aşı grubunu, aynı ülkenin haftalık ölüm verisiyle eşleştiriyoruz.
+    JOIN covid.weekly_deaths wd
+        ON wd.location = a.location
+
+    WHERE wd.tam_hafta = TRUE
+      AND wd.haftalik_olum_milyon_basina IS NOT NULL
+
+      -- Aşı görünümünden sonraki ilk haftadan başlayarak 12 hafta inceliyoruz.
+      AND wd.hafta_baslangici
+          BETWEEN DATE '2021-09-13' AND DATE '2021-11-29'
+)
+
+-- 3) Her aşı grubu için kaydedilen ortalama haftalık ölüm oranını hesaplıyoruz.
+SELECT
+    asi_grubu,
+
+    -- Analize dahil olan farklı ülke sayısı.
+    COUNT(DISTINCT location) AS ulke_sayisi,
+
+    -- Kullanılan toplam ülke-hafta gözlemi.
+    COUNT(*) AS ulke_hafta_kaydi,
+
+    -- Bir milyon kişi başına ortalama haftalık ölüm sayısı.
+    ROUND(
+        AVG(haftalik_olum_milyon_basina)::NUMERIC,
+        2
+    ) AS ortalama_haftalik_olum_milyon_basina
+
+FROM oniki_hafta_olum
+
+GROUP BY asi_grubu
+
+-- En yüksek ortalama ölüm oranı üstte görünecek.
+ORDER BY ortalama_haftalik_olum_milyon_basina DESC;
+
+/* =========================================================
+   YONTEM NOTLARI VE ANALIZ SINIRLILIKLARI
+   =========================================================
+
+1) KURESEL HAFTALIK TOPLAMLAR
+   - "Tam hafta" filtresi, yalnizca o haftanin 7 gunu icin kaydi olan
+     ulkeleri toplama dahil eder.
+   - Bir ulkenin bir gunluk kaydi eksikse o ulke ilgili haftanin
+     kuresel toplaminda yer almaz.
+   - Bu nedenle "en yuksek kuresel hafta" sonucu, tum ulkeler yerine
+     tam veri bildiren ulkeler arasindaki kaydedilen toplami ifade eder.
+
+2) HAFTALIK VAKA ALANLARI
+   - Tam haftalarda mevcut_vaka_toplami ile haftalik_yeni_vaka ayni
+     degeri tasiyabilir. Analizde haftalik yeni vaka, ilgili haftanin
+     kaydedilen vaka toplami olarak kullanilmistir.
+
+3) POZITIFLIK VE TEST YOGUNLUGU
+   - Pozitiflik siralamalari, dogrudan positive_rate alanindan uretilir.
+   - Dusuk test yogunlugunda yuksek pozitiflik oranlari daha dikkatli
+     yorumlanmalidir. Bu nedenle pozitiflik sonucu ile birlikte
+     gunluk_test_bin_kisi ve kayitli gun sayisi da incelenmistir.
+   - Test birimleri ulkeler arasinda farkli oldugu icin (tests performed,
+     people tested, samples tested), ham test toplamlari dogrudan
+     ulkeler arasi karsilastirma icin kullanilmamalidir.
+
+4) ASI KAPSAMI KARSILASTIRMASI
+   - Asi gruplari, 6 Eylul 2021 haftasindaki "haftadaki son gecerli
+     gozlem" ile olusturulmustur. Bu tanim, gunluk bir tarih seciminden
+     farkli sayida ulke kapsayabilir.
+   - "En yuksek tam asi orani" siralamasi her ulkenin kendi son
+     gecerli kaydini kullanir; gozlem tarihleri ulkeler arasynda ayni
+     degildir. Bu siralama ortak bir tarih karsilastirmasi degildir.
+   - 6 Eylul 2021 ortak tarihli asi grubu ile sonraki 12 haftanin olum
+     oranlari arasinda iliski incelenmistir; bu sonuc nedensellik kaniti
+     degildir.
+   - Orta asi kapsam grubunun (18.76) dusuk asi kapsam grubundan (14.96)
+     yuksek cikmasi; yas yapisi, dalganin zamanlamasi, saglik sistemi ve
+     eksik olum bildirimi gibi etkenlerin sonucu etkileyebilecegini
+     gostermektedir.
+
+5) ULKE KAPSAMI
+   - Taiwan, Kosovo, Hong Kong ve Palestine ulke olarak siniflandirilir
+     ve tum ulke karsilastirmalarina dahil edilir.
+
+6) TEKRARLANABILIRLIK
+   - Notebook ve dashboard dosya yollari proje kokune goreli olmali;
+     kullaniciya ozel mutlak dosya yollari kullanilmamalidir.
+*/
 
 
 
