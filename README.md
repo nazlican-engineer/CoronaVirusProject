@@ -6,6 +6,25 @@
 
 ![Vaka Analizi dashboard](dashboard/screenshots/01-vaka-analizi.png)
 
+---
+
+## Projenin Amacı
+
+COVID-19 verileri ülkeler arasında farklı sıklıkta, farklı kapsamda ve bazen eksik bildirilir. Bu proje, ülke karşılaştırmalarını doğrudan toplam sayılara dayandırmak yerine veri kalitesini ve ölçü tanımını da dikkate alarak daha anlamlı hâle getirmek için hazırlandı.
+
+Amaç; vaka, ölüm, test, aşılama, hastane ve demografik göstergeleri aynı analiz akışında incelemek; toplam sayılarla nüfusa göre değerleri birlikte sunmak ve sonuçların hangi veri sınırları içinde yorumlanması gerektiğini görünür kılmaktır.
+
+---
+
+## Nerede Yardımcı Olur?
+
+- Toplam değerler ile milyon kişi başına değerler arasındaki farkı görmeye ve ülkeleri daha adil karşılaştırmaya yardımcı olur.
+- Eksik kayıtları sıfır kabul etmeden haftalık vaka ve ölüm eğilimlerini yorumlamayı destekler.
+- Test, aşılama ve hastane verilerinin kapsam farklarını görünür kılar.
+- Power BI dashboard'undaki Kıta, Ülke ve Tarih filtreleriyle belirli bir soru veya döneme odaklanmayı kolaylaştırır.
+
+---
+
 ## Proje Özeti
 
 Bu proje COVID-19 verisini ülke düzeyinde iki ölçekte inceler:
@@ -16,6 +35,8 @@ Bu proje COVID-19 verisini ülke düzeyinde iki ölçekte inceler:
 | **Nüfusa göre değerler** | Milyon kişi başına vaka, ölüm, hastane ve yoğun bakım yükü |
 
 Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabilir; milyon kişi başına değerler kullanıldığında ülke sıralaması değişebilir. Dashboard'daki Kıta, Ülke ve Tarih filtreleri bütün sayfalarda bu karşılaştırmayı daraltır.
+
+---
 
 ## Öne Çıkan Bulgular
 
@@ -28,6 +49,8 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 | Aşı | Eksik aşı kaydı sıfır kabul edilmez; Türkiye'de aşı oranları 2021 boyunca yükselip sonra yataylaşır. | [Aşı analizi](notebooks/vaccination_analysis.ipynb) |
 | Demografi | Yaşlı nüfus oranı ile milyon kişi başına ölüm arasında pozitif ilişki görülür; bu nedensellik değildir. | [Demografik analiz](notebooks/demographic_economic_analysis.ipynb) |
 
+---
+
 ## Notebook Rehberi
 
 | Dosya | Amaç | Analizde öne çıkan nokta |
@@ -39,6 +62,8 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 | [testing_analysis.ipynb](notebooks/testing_analysis.ipynb) | Test kapsamı, test birimi ve pozitiflik oranını inceler. | Yapılan test, test edilen kişi ve örnek sayısı aynı ölçü değildir. |
 | [vaccination_analysis.ipynb](notebooks/vaccination_analysis.ipynb) | Aşı dozları ve aşılanma oranlarını vaka/ölüm eğrileriyle inceler. | Aşı oranında her ülkenin son geçerli değeri kullanılır. |
 | [demographic_economic_analysis.ipynb](notebooks/demographic_economic_analysis.ipynb) | Demografik ve ekonomik göstergeler ile COVID-19 yükü ilişkisini inceler. | Her nokta bir ülkeyi temsil eder; korelasyon neden-sonuç kanıtı değildir. |
+
+---
 
 ## Notebook Bulguları
 
@@ -363,6 +388,8 @@ Bu üç dağılım grafiği kişi başı GSYH, 65 yaş üstü nüfus ve HDI ile 
 
 Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
 
+---
+
 ## SQL ile Veri Doğrulama ve Analiz Yaklaşımı
 
 SQL, Python ile hazırlanan temiz ve haftalık tabloların PostgreSQL içinde kontrol edilmesi ve tekrar analiz edilmesi için kullanılır. Sorguların tamamı [sql/03_analysis_queries.sql](sql/03_analysis_queries.sql) dosyasındadır.
@@ -402,6 +429,8 @@ Aşı oranları her ülkede her gün yayımlanmadığı için, her hafta ülkeni
 
 Ülkeler, ortak veri kapsamının yüksek olduğu 6 Eylül 2021 haftasında tam aşılama oranına göre düşük, orta ve yüksek grup olarak ayrıldı. Sonraki 12 haftadaki milyon kişi başına ölüm oranları karşılaştırıldı. Orta kapsama grubunun düşük kapsama grubundan daha yüksek çıkması; yaş yapısı, dalganın zamanı, sağlık sistemi ve eksik bildirim gibi başka etkenlerin sonucu etkilediğini gösterir. Bu analiz nedensellik kanıtı değildir.
 
+
+---
 
 ## Dashboard Görselleri
 
@@ -479,6 +508,8 @@ Bu sayfa, ülkelerin demografik ve ekonomik göstergeleri ile milyon kişi baş�
 - Grafiklerde GSYH, medyan yaş ve insani gelişmişlik endeksi ile ölüm yükü birlikte incelenir.
 
 Bu noktaların yakın veya uzak olması ilişkiyi anlatır; tek başına bir göstergenin ölümlere neden olduğunu kanıtlamaz.
+
+---
 
 ## Veri Kaynağı
 
