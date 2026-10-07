@@ -40,6 +40,55 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 | [vaccination_analysis.ipynb](notebooks/vaccination_analysis.ipynb) | Aşı dozları ve aşılanma oranlarını vaka/ölüm eğrileriyle inceler. | Aşı oranında her ülkenin son geçerli değeri kullanılır. |
 | [demographic_economic_analysis.ipynb](notebooks/demographic_economic_analysis.ipynb) | Demografik ve ekonomik göstergeler ile COVID-19 yükü ilişkisini inceler. | Her nokta bir ülkeyi temsil eder; korelasyon neden-sonuç kanıtı değildir. |
 
+## Notebook sonuçları: denetim bulguları
+
+Bu bölüm, notebook'ların sonundaki bulgu notlarının kısa ama sayısal özetidir. Sayılar mevcut notebook çıktısına aittir; ham veri yeniden indirildiğinde ve notebook'lar yeniden çalıştırıldığında güncellenmelidir.
+
+### Veri denetimi ve vaka
+
+- Temizlenmiş ülke tablosunda **194 ülke**, **324.819 satır** ve **67 sütun** bulunmuştur.
+- Tarih aralığı **1 Ocak 2020 – 14 Ağustos 2024** olarak görülmüştür.
+- Temizlenmiş tabloda tekrarlayan ülke-tarih kaydı bulunmamıştır.
+- Kümülatif vaka değerinde azalma görülen **16 ülke-tarih kaydı** vardır. Bu kayıtların hepsinde yeni vaka değeri eksiktir.
+- Eksik yeni vaka değeri, sıfır vaka kabul edilmemiş; bu günleri içeren haftalar tam hafta karşılaştırmasından çıkarılmıştır.
+
+### Ölüm
+
+- Kısmen eksik kümülatif ölüm kayıtlarındaki boşluklar veri serisinin başında veya sonunda görülmüştür; dolu kayıtların arasında eksik kümülatif ölüm bulunmamıştır.
+- Kümülatif ölüm değerinde azalma görülen **9 ülke-tarih kaydı** vardır.
+- Bu 9 kaydın tamamında yeni ölüm değeri eksiktir. Bu birliktelik neden-sonuç olarak yorumlanmamış, kaynak değerler korunmuştur.
+
+### Yayılım, hastane ve yoğun bakım
+
+- R değeri **191 ülkede** bulunmuştur.
+- R verisi bulunan her ülkenin aktif kayıt aralığında aradaki günler eksiksizdir.
+- **2 Ocak 2023** tarihinde 191 ülkenin R değeri birlikte bulunduğu için ülkeler arası R karşılaştırması bu tarih üzerinden yapılmıştır.
+- Hastane ve yoğun bakım serileri, yalnızca bu verileri paylaşan ülkeleri kapsar; boş kayıtlar sıfır sayılmaz.
+
+### Test
+
+- Toplam test verisi **172**, yeni test verisi **142**, yumuşatılmış yeni test verisi **169** ve pozitiflik oranı **162 ülkede** bulunmuştur.
+- Test birimi bilgisi **176 ülkede** vardır: **138** ülke yapılan test sayısı, **23** ülke test edilen kişi, **14** ülke örnek sayısı ve **1** ülke belirsiz birim kullanır.
+- Hiçbir ülkede zaman içinde birden fazla test birimi görülmemiştir.
+- Farklı test birimleri aynı ölçü olmadığı için ülkeler arası karşılaştırma yalnızca yapılan test sayısını kullanan ülkelerle yapılır.
+
+### Aşılama
+
+- Toplam doz, en az bir doz, tam aşılama ve güçlendirici doz serilerinde negatif kayıt bulunmamıştır.
+- Tam aşılı kişi sayısının en az bir doz olan kişi sayısını geçtiği mantıksal olarak çelişkili kayıt bulunmamıştır.
+- Aşı oranı birçok ülkede günlük ve kesintisiz yayımlanmaz. Bu nedenle eksik aşı oranı sıfırla doldurulmamıştır.
+
+### Demografik ve ekonomik göstergeler
+
+- Her ülke için tek satırlı ülke profili oluşturulmuştur.
+- Milyon kişi başına toplam ölüm için en geniş ortak kapsam, **4 Ağustos 2024'te 194 ülkede** bulunmuştur.
+- Tam aşılama oranı için en geniş ortak kapsam, **16 Ağustos 2021'de 106 ülkede** bulunmuştur.
+- Log kişi başı GSYH ve milyon kişi başına ölüm ilişkisi: **r = 0.498** (**186 ülke**).
+- 65 yaş üstü nüfus oranı ve milyon kişi başına ölüm ilişkisi: **r = 0.683** (**182 ülke**).
+- HDI ve tam aşılama oranı ilişkisi: **r = 0.741** (**105 ülke**).
+
+Bu sayılar veri kalitesi ve kapsamını anlamaya yardım eder. Korelasyon değerleri, göstergeler arasında neden-sonuç ilişkisi olduğu anlamına gelmez.
+
 ## Notebook Bulguları
 
 Notebook'lar, dashboard'da özetlenen ölçülerin veri kalitesi kontrollerini ve ülke karşılaştırmalarını ayrıntılandırır. Aşağıdaki görseller bu analizlerden seçilmiştir.
