@@ -10,9 +10,13 @@ Notebook'lar, dashboard'da özetlenen ölçülerin veri kalitesi kontrollerini v
 
 ![Vaka karşılaştırması](docs/figures/01-vaka-karsilastirma.png)
 
+> **Yöntem notu:** Analiz yalnızca ülke kayıtlarıyla yapıldı; yinelenen ülke-tarih gözlemleri tekilleştirildi. Haftalık toplamlar mevcut günlük değerlerin toplamıdır; ülkeler arası haftalık karşılaştırmalarda yalnızca yedi günü dolu haftalar kullanıldı.
+
 4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkar. Milyon kişi başına hesaplama ise nüfus büyüklüğünün etkisini azaltır ve sıralamayı değiştirebilir. Bu nedenle dashboard'da mutlak değerler ile kişi başına ölçüler birlikte sunulur.
 
 ![Ölüm karşılaştırması](docs/figures/02-olum-karsilastirma.png)
+
+> **Yöntem notu:** Eksik günlük ölüm kayıtları sıfırla doldurulmadı. Kümülatif serilerde görülen kaynak düzeltmeleri korunurken, haftalık değişim yalnızca ardışık iki tam hafta arasında hesaplandı.
 
 Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
 
@@ -20,11 +24,15 @@ Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısınd
 
 ![İtalya'da hastane ve yoğun bakım yükü](docs/figures/03-italya-hastane-yogun-bakim.png)
 
+> **Yöntem notu:** Hastane ve YBÜ yükü milyon kişi başına gösterilir. Veri yalnızca bildirim yapan ülkeleri kapsar; boş gözlemler sıfır kabul edilmez. R değeri kaynağı 02.01.2023 sonrasında sona erer.
+
 Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
 
 ### Test verisinin yorumu
 
 ![Birleşik Arap Emirlikleri test ve pozitiflik serisi](docs/figures/04-bae-test-pozitiflik.png)
+
+> **Yöntem notu:** Ülkeler arası test sıralamalarında yalnızca tests performed birimi kullanılır. Eksik günler doldurulmaz; tam haftalık test toplamı için yedi günün de kayıtlı olması gerekir.
 
 Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
 
@@ -32,11 +40,15 @@ Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. 
 
 ![Türkiye'de aşılama, vaka ve ölüm eğilimleri](docs/figures/05-turkiye-asi-vaka-olum.png)
 
+> **Yöntem notu:** Her ülke için haftadaki son geçerli ilk doz ve tam aşılama gözlemi kullanılır. Oranı olmayan hafta boş kalır; eksik kayıt sıfır aşılama olarak yorumlanmaz.
+
 Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
 
 ### Demografik ve ekonomik ilişkiler
 
 ![Demografik, ekonomik ve COVID-19 korelasyonları](docs/figures/06-demografik-korelasyon.png)
+
+> **Yöntem notu:** Her ülke için tek satırlı bir ülke profili kullanılır. Bir göstergesi eksik olan ülke yalnızca o ilişkinin hesabından çıkarılır; korelasyonlar ülke düzeyindedir ve nedensellik göstermez.
 
 Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
 
