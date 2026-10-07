@@ -59,47 +59,6 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 Bu veri denetimi aşamasında yalnızca yapısal sorunlar incelendi. Sütun bazındaki eksik değerler, ilgili analiz notebook'larında değişkenin anlamına göre ayrıca değerlendirilecektir.
 
 ### Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
-
-![Vaka karşılaştırması](docs/figures/01-vaka-karsilastirma.png)
-#### Türkiye'de Vaka Eğrileri
-
-![Türkiye haftalık yeni vaka](docs/figures/01a-turkiye-haftalik-vaka.png)
-
-Türkiye'de haftalık yeni vaka sayısı 2022 başında en yüksek seviyeye ulaşır. 2023 sonrasında serinin sıfıra yaklaşması, bu dönemde düzenli vaka bildiriminin sona erdiğini gösterir; sıfır vaka anlamına gelmez.
-
-![Türkiye kümülatif vaka](docs/figures/01b-turkiye-kumulatif-vaka.png)
-
-Kümülatif vaka eğrisi yalnızca yukarı yönlü ilerler. Eğrinin dikleştiği dönemler, yeni vaka bildirimlerinin hızlandığı dalgalardır.
-
-![Milyon kişi başına haftalık vaka](docs/figures/01d-haftalik-vaka-milyon-basina.png)
-
-8–14 Mayıs 2023 haftasında Brunei başta olmak üzere küçük nüfuslu ülkeler milyon kişi başına haftalık vakada üst sıradadır. Bu görsel, toplam sayı ile nüfusa göre ölçünün farklı sıralamalar ürettiğini gösterir.
-
-
-> **Nasıl hesapladık?** Günlük vaka sayılarını haftalara topladık. Bir haftada gün eksikse, o haftayı ülkeleri karşılaştırırken kullanmadık.
-
-4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkar. Milyon kişi başına hesaplama ise nüfus büyüklüğünün etkisini azaltır ve sıralamayı değiştirebilir. Bu nedenle dashboard'da mutlak değerler ile kişi başına ölçüler birlikte sunulur.
-
-![Ölüm karşılaştırması](docs/figures/02-olum-karsilastirma.png)
-#### Türkiye'de Ölüm Eğrileri
-
-![Türkiye haftalık yeni ölüm](docs/figures/02a-turkiye-haftalik-olum.png)
-
-Türkiye'de haftalık yeni ölüm grafiği, tam hafta ve eksik gün içeren haftaları ayırır. En yüksek ölüm dalgaları 2021 ile 2022 başında görülür.
-
-![Türkiye kümülatif ölüm](docs/figures/02b-turkiye-kumulatif-olum.png)
-
-Kümülatif ölüm eğrisindeki hızlı yükselişler salgın dalgalarıyla ilişkilidir. Son dönemdeki yataylaşma, bildirilen ölüm sayısındaki artışın azalmasını gösterir.
-
-![Milyon kişi başına haftalık ölüm](docs/figures/02d-haftalik-olum-milyon-basina.png)
-
-19–25 Haziran 2023 haftasında milyon kişi başına yeni ölüm sıralaması, toplam ölüm sayısından farklı ülkeleri öne çıkarır. Bu nedenle ölüm yükünü nüfusa göre de incelemek gerekir.
-
-
-> **Nasıl hesapladık?** Eksik günleri sıfır ölüm gibi göstermedik. Haftalık değişimi yalnızca verisi tam olan iki hafta arasında hesapladık.
-
-Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
-
 #### Vaka Notebook'unun Ayrıntılı Bulguları
 
 Vaka Analizinde Yapılan İşlemler ve Bulgular
@@ -122,7 +81,25 @@ Vaka Analizinde Yapılan İşlemler ve Bulgular
 - Hafta sonundaki kümülatif vaka değerleri eklendi. Her ülkenin pazar günündeki total_cases değeri alındı. Kümülatif değerler haftalık olarak toplanmadı; pazar değeri bulunamadığında eksik bırakıldı.
 - Dashboard için haftalık çıktı tablosu hazırlandı. Mevcut vaka toplamı, veri kapsamı, haftalık değişimler, nüfusa göre vaka değeri ve hafta sonu kümülatif toplamı aynı tabloda birleştirildi.
 
+![Vaka karşılaştırması](docs/figures/01-vaka-karsilastirma.png)
+#### Türkiye'de Vaka Eğrileri
 
+![Türkiye haftalık yeni vaka](docs/figures/01a-turkiye-haftalik-vaka.png)
+
+Türkiye'de haftalık yeni vaka sayısı 2022 başında en yüksek seviyeye ulaşır. 2023 sonrasında serinin sıfıra yaklaşması, bu dönemde düzenli vaka bildiriminin sona erdiğini gösterir; sıfır vaka anlamına gelmez.
+
+![Türkiye kümülatif vaka](docs/figures/01b-turkiye-kumulatif-vaka.png)
+
+Kümülatif vaka eğrisi yalnızca yukarı yönlü ilerler. Eğrinin dikleştiği dönemler, yeni vaka bildirimlerinin hızlandığı dalgalardır.
+
+![Milyon kişi başına haftalık vaka](docs/figures/01d-haftalik-vaka-milyon-basina.png)
+
+8–14 Mayıs 2023 haftasında Brunei başta olmak üzere küçük nüfuslu ülkeler milyon kişi başına haftalık vakada üst sıradadır. Bu görsel, toplam sayı ile nüfusa göre ölçünün farklı sıralamalar ürettiğini gösterir.
+
+
+> **Nasıl hesapladık?** Günlük vaka sayılarını haftalara topladık. Bir haftada gün eksikse, o haftayı ülkeleri karşılaştırırken kullanmadık.
+
+4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkar. Milyon kişi başına hesaplama ise nüfus büyüklüğünün etkisini azaltır ve sıralamayı değiştirebilir. Bu nedenle dashboard'da mutlak değerler ile kişi başına ölçüler birlikte sunulur.
 
 #### Ölüm Notebook'unun Ayrıntılı Bulguları
 
@@ -158,28 +135,27 @@ Vaka Analizinde Yapılan İşlemler ve Bulgular
 
 - Fazla ölüm verisi, dashboard planında yer almadığı için bu projenin analiz kapsamına alınmadı.
 
+![Ölüm karşılaştırması](docs/figures/02-olum-karsilastirma.png)
+#### Türkiye'de Ölüm Eğrileri
+
+![Türkiye haftalık yeni ölüm](docs/figures/02a-turkiye-haftalik-olum.png)
+
+Türkiye'de haftalık yeni ölüm grafiği, tam hafta ve eksik gün içeren haftaları ayırır. En yüksek ölüm dalgaları 2021 ile 2022 başında görülür.
+
+![Türkiye kümülatif ölüm](docs/figures/02b-turkiye-kumulatif-olum.png)
+
+Kümülatif ölüm eğrisindeki hızlı yükselişler salgın dalgalarıyla ilişkilidir. Son dönemdeki yataylaşma, bildirilen ölüm sayısındaki artışın azalmasını gösterir.
+
+![Milyon kişi başına haftalık ölüm](docs/figures/02d-haftalik-olum-milyon-basina.png)
+
+19–25 Haziran 2023 haftasında milyon kişi başına yeni ölüm sıralaması, toplam ölüm sayısından farklı ülkeleri öne çıkarır. Bu nedenle ölüm yükünü nüfusa göre de incelemek gerekir.
+
+
+> **Nasıl hesapladık?** Eksik günleri sıfır ölüm gibi göstermedik. Haftalık değişimi yalnızca verisi tam olan iki hafta arasında hesapladık.
+
+Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
+
 ### Yayılım ve Hastane Yükü
-
-![İtalya'da hastane ve yoğun bakım yükü](docs/figures/03-italya-hastane-yogun-bakim.png)
-#### Yayılım ve Hastane İçin Ek Görseller
-
-![İtalya R değeri ve önlem sıkılığı](docs/figures/03b-italya-r-ve-onlem.png)
-
-İtalya örneğinde R değeri ile önlem sıkılığı aynı zaman ekseninde görülür. R değerinin 1 çizgisinin üstünde olması yayılımın artma eğiliminde olduğunu gösterir; bu grafik tek başına önlemlerin etkisini kanıtlamaz.
-
-![Ülkelere göre R değeri](docs/figures/03c-r-degeri-ulke-karsilastirma.png)
-
-2 Ocak 2023 tarihinde Kosova, Bolivya ve Lübnan en yüksek R değerleri arasındadır. Kesikli çizgi R = 1 eşiğini gösterir.
-
-![Hastane ve yoğun bakım yükü](docs/figures/03d-hastane-ybu-karsilastirma.png)
-
-13 Şubat 2022'de Bulgaristan, Sırbistan ve Romanya hastanede yatan kişi sayısında öne çıkar. Hastane ve yoğun bakım yükleri milyon kişi başına gösterildiği için ülkeler karşılaştırılabilir.
-
-
-> **Nasıl hesapladık?** Hasta sayılarını ülkelerin nüfusuna göre karşılaştırdık. Veri vermeyen ülkeleri ve boş günleri sıfır kabul etmedik. R değeri verisi 02.01.2023'te bitiyor.
-
-Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
-
 #### Yayılım ve Hastane Notebook'unun Ayrıntılı Bulguları
 
 ### R Değeri ve Önlem Sıkılığı
@@ -219,20 +195,27 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 - Veri bulunmayan günler sıfır kabul edilmeyecek, grafiklerde boşluk olarak korunacaktır.
 - Bu bölüm için ayrı bir işlenmiş CSV oluşturulmasına gerek yoktur; dashboard günlük göstergeleri `countries_clean.csv` dosyasından kullanabilir.
 
+![İtalya'da hastane ve yoğun bakım yükü](docs/figures/03-italya-hastane-yogun-bakim.png)
+#### Yayılım ve Hastane İçin Ek Görseller
+
+![İtalya R değeri ve önlem sıkılığı](docs/figures/03b-italya-r-ve-onlem.png)
+
+İtalya örneğinde R değeri ile önlem sıkılığı aynı zaman ekseninde görülür. R değerinin 1 çizgisinin üstünde olması yayılımın artma eğiliminde olduğunu gösterir; bu grafik tek başına önlemlerin etkisini kanıtlamaz.
+
+![Ülkelere göre R değeri](docs/figures/03c-r-degeri-ulke-karsilastirma.png)
+
+2 Ocak 2023 tarihinde Kosova, Bolivya ve Lübnan en yüksek R değerleri arasındadır. Kesikli çizgi R = 1 eşiğini gösterir.
+
+![Hastane ve yoğun bakım yükü](docs/figures/03d-hastane-ybu-karsilastirma.png)
+
+13 Şubat 2022'de Bulgaristan, Sırbistan ve Romanya hastanede yatan kişi sayısında öne çıkar. Hastane ve yoğun bakım yükleri milyon kişi başına gösterildiği için ülkeler karşılaştırılabilir.
+
+
+> **Nasıl hesapladık?** Hasta sayılarını ülkelerin nüfusuna göre karşılaştırdık. Veri vermeyen ülkeleri ve boş günleri sıfır kabul etmedik. R değeri verisi 02.01.2023'te bitiyor.
+
+Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
+
 ### Test Verisinin Yorumu
-
-![Birleşik Arap Emirlikleri test ve pozitiflik serisi](docs/figures/04-bae-test-pozitiflik.png)
-#### Pozitiflik Oranı Karşılaştırması
-
-![En yüksek test pozitiflik oranları](docs/figures/04b-pozitiflik-orani-karsilastirma.png)
-
-20 Mart 2022'de en yüksek pozitiflik oranları Gürcistan ve Hollanda'da görülür. Pozitiflik oranı test yoğunluğu ve raporlama kapsamıyla birlikte yorumlanmalıdır.
-
-
-> **Nasıl hesapladık?** Ülkeleri adil karşılaştırmak için sadece yapılan test sayısını bildiren ülkeleri kullandık. Eksik günleri doldurmadık.
-
-Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
-
 #### Test Notebook'unun Ayrıntılı Bulguları
 
 ### Veri Kapsamı ve Test Birimleri
@@ -268,24 +251,19 @@ Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. 
 - Dashboard için `weekly_tests.csv` tablosu oluşturulmuştur. Haftalık test kartı yalnızca `tam_hafta = True` olan kayıtlarda kullanılmalıdır.
 - Test birimi, veri durumu ve son gözlem tarihi dashboard’da kullanıcıya gösterilmelidir.
 
+![Birleşik Arap Emirlikleri test ve pozitiflik serisi](docs/figures/04-bae-test-pozitiflik.png)
+#### Pozitiflik Oranı Karşılaştırması
+
+![En yüksek test pozitiflik oranları](docs/figures/04b-pozitiflik-orani-karsilastirma.png)
+
+20 Mart 2022'de en yüksek pozitiflik oranları Gürcistan ve Hollanda'da görülür. Pozitiflik oranı test yoğunluğu ve raporlama kapsamıyla birlikte yorumlanmalıdır.
+
+
+> **Nasıl hesapladık?** Ülkeleri adil karşılaştırmak için sadece yapılan test sayısını bildiren ülkeleri kullandık. Eksik günleri doldurmadık.
+
+Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
+
 ### Aşılama, Vaka ve Ölüm Eğrileri
-
-![Türkiye'de aşılama, vaka ve ölüm eğilimleri](docs/figures/05-turkiye-asi-vaka-olum.png)
-#### Aşı Kapsamı ve İlerleyişi
-
-![Ülkelere göre aşı kapsamı](docs/figures/05a-asi-kapsami-karsilastirma.png)
-
-6–12 Eylül 2021 haftasında Birleşik Arap Emirlikleri ve Katar en az bir doz ile tam aşılı oranlarında üst sıradadır. Mavi çubuk en az bir doz, yeşil çubuk tam aşılı oranını gösterir.
-
-![Türkiye aşı ilerleyişi](docs/figures/05b-turkiye-asi-ilerlemesi.png)
-
-Türkiye'de en az bir doz ve tam aşılı oranı 2021 boyunca yükselir, ardından yataylaşır. Serideki boşluklar veri eksikliğidir; sıfır aşılama değildir.
-
-
-> **Nasıl hesapladık?** Her hafta için ülkelerin en güncel aşı oranını aldık. Veri yoksa o haftayı boş bıraktık; sıfır aşı yapılmış gibi göstermedik.
-
-Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
-
 #### Aşı Notebook'unun Ayrıntılı Bulguları
 
 - Temizlenmiş ülke verileri kullanıldı. Aşı analizi, `countries_clean.csv` içindeki ülke bazlı kayıtlara dayanır.
@@ -314,20 +292,23 @@ Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha
 
 - Dashboard için `weekly_vaccinations.csv` tablosu oluşturuldu. Tablo; haftalık aşı oranlarını, gerçek gözlem tarihini, gözlem gecikmesini ve veri durumunu içerir.
 
+![Türkiye'de aşılama, vaka ve ölüm eğilimleri](docs/figures/05-turkiye-asi-vaka-olum.png)
+#### Aşı Kapsamı ve İlerleyişi
+
+![Ülkelere göre aşı kapsamı](docs/figures/05a-asi-kapsami-karsilastirma.png)
+
+6–12 Eylül 2021 haftasında Birleşik Arap Emirlikleri ve Katar en az bir doz ile tam aşılı oranlarında üst sıradadır. Mavi çubuk en az bir doz, yeşil çubuk tam aşılı oranını gösterir.
+
+![Türkiye aşı ilerleyişi](docs/figures/05b-turkiye-asi-ilerlemesi.png)
+
+Türkiye'de en az bir doz ve tam aşılı oranı 2021 boyunca yükselir, ardından yataylaşır. Serideki boşluklar veri eksikliğidir; sıfır aşılama değildir.
+
+
+> **Nasıl hesapladık?** Her hafta için ülkelerin en güncel aşı oranını aldık. Veri yoksa o haftayı boş bıraktık; sıfır aşı yapılmış gibi göstermedik.
+
+Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
+
 ### Demografik ve Ekonomik İlişkiler
-
-![Demografik, ekonomik ve COVID-19 korelasyonları](docs/figures/06-demografik-korelasyon.png)
-#### Demografik Dağılım Grafikleri
-
-![Demografik ve ekonomik göstergeler](docs/figures/06a-demografik-dagilim.png)
-
-Bu üç dağılım grafiği kişi başı GSYH, 65 yaş üstü nüfus ve HDI ile milyon kişi başına ölüm arasındaki ilişkiyi gösterir. Her nokta bir ülkedir; noktaların yoğunlaşması benzer değerlere sahip daha fazla ülke olduğunu anlatır.
-
-
-> **Nasıl hesapladık?** Her ülkeyi tek bir profil ile karşılaştırdık. Bir bilgi eksikse o ülkeyi yalnızca ilgili grafikten çıkardık. Bu grafikler ilişkiyi gösterir, neden-sonuç göstermez.
-
-Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
-
 #### Demografik ve Ekonomik Notebook'unun Ayrıntılı Bulguları
 
 ### Veri Kalitesi ve Ülke Profili
@@ -369,6 +350,18 @@ Bu üç dağılım grafiği kişi başı GSYH, 65 yaş üstü nüfus ve HDI ile 
 - Korelasyon ısı haritası, seçili demografik ve ekonomik göstergelerin birlikte incelenmesi için kullanılacaktır.
 - Grafiklerde her nokta bir ülkeyi temsil eder.
 - Regression veya tahmin modeli bu projenin kapsamına alınmamıştır.
+
+![Demografik, ekonomik ve COVID-19 korelasyonları](docs/figures/06-demografik-korelasyon.png)
+#### Demografik Dağılım Grafikleri
+
+![Demografik ve ekonomik göstergeler](docs/figures/06a-demografik-dagilim.png)
+
+Bu üç dağılım grafiği kişi başı GSYH, 65 yaş üstü nüfus ve HDI ile milyon kişi başına ölüm arasındaki ilişkiyi gösterir. Her nokta bir ülkedir; noktaların yoğunlaşması benzer değerlere sahip daha fazla ülke olduğunu anlatır.
+
+
+> **Nasıl hesapladık?** Her ülkeyi tek bir profil ile karşılaştırdık. Bir bilgi eksikse o ülkeyi yalnızca ilgili grafikten çıkardık. Bu grafikler ilişkiyi gösterir, neden-sonuç göstermez.
+
+Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
 
 ## SQL ile Veri Doğrulama ve Analiz Yaklaşımı
 
