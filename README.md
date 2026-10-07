@@ -40,9 +40,9 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 | [vaccination_analysis.ipynb](notebooks/vaccination_analysis.ipynb) | Aşı dozları ve aşılanma oranlarını vaka/ölüm eğrileriyle inceler. | Aşı oranında her ülkenin son geçerli değeri kullanılır. |
 | [demographic_economic_analysis.ipynb](notebooks/demographic_economic_analysis.ipynb) | Demografik ve ekonomik göstergeler ile COVID-19 yükü ilişkisini inceler. | Her nokta bir ülkeyi temsil eder; korelasyon neden-sonuç kanıtı değildir. |
 
-## Notebook Bulgular?
+## Notebook Bulguları
 
-### Veri Denetimi ve Temizlik
+## • Veri Denetimi ve Temizlik
 
 - Veri setindeki konumlar; ana analiz ülkeleri, bölgeler/özel statülü konumlar, kıtalar, gelir grupları ile Dünya ve Avrupa Birliği toplamları olarak ayrıldı.
 - Western Sahara, Faroe Islands ve Birleşik Krallık alt bölgeleri gibi ülke olarak değerlendirilmemesi gereken konumlar `df_regions` içinde tutuldu.
@@ -58,7 +58,7 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 
 Bu veri denetimi aşamasında yalnızca yapısal sorunlar incelendi. Sütun bazındaki eksik değerler, ilgili analiz notebook'larında değişkenin anlamına göre ayrıca değerlendirilecektir.
 
-### Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
+## • Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
 #### Vaka Notebook'unun Ayrıntılı Bulguları
 
 Vaka Analizinde Yapılan İşlemler ve Bulgular
@@ -155,7 +155,7 @@ Kümülatif ölüm eğrisindeki hızlı yükselişler salgın dalgalarıyla ili�
 
 Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
 
-### Yayılım ve Hastane Yükü
+## • Yayılım ve Hastane Yükü
 #### Yayılım ve Hastane Notebook'unun Ayrıntılı Bulguları
 
 ### R Değeri ve Önlem Sıkılığı
@@ -215,7 +215,7 @@ Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısınd
 
 Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
 
-### Test Verisinin Yorumu
+## • Test Verisinin Yorumu
 #### Test Notebook'unun Ayrıntılı Bulguları
 
 ### Veri Kapsamı ve Test Birimleri
@@ -263,7 +263,7 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 
 Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
 
-### Aşılama, Vaka ve Ölüm Eğrileri
+## • Aşılama, Vaka ve Ölüm Eğrileri
 #### Aşı Notebook'unun Ayrıntılı Bulguları
 
 - Temizlenmiş ülke verileri kullanıldı. Aşı analizi, `countries_clean.csv` içindeki ülke bazlı kayıtlara dayanır.
@@ -308,7 +308,7 @@ Türkiye'de en az bir doz ve tam aşılı oranı 2021 boyunca yükselir, ardınd
 
 Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
 
-### Demografik ve Ekonomik İlişkiler
+## • Demografik ve Ekonomik İlişkiler
 #### Demografik ve Ekonomik Notebook'unun Ayrıntılı Bulguları
 
 ### Veri Kalitesi ve Ülke Profili
@@ -431,7 +431,7 @@ Bu sayfa, seçilen dönemdeki ölüm yükünü vaka sayılarıyla birlikte yorum
 
 Çizgi grafik yıllara göre aylık ölümleri, sütun grafik kıtalardaki dağılımı, harita ise nüfusa göre ölüm yükünü gösterir.
 
-### Yayılım ve Hastane
+## • Yayılım ve Hastane
 
 ![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
 
