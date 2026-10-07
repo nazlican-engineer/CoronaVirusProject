@@ -72,7 +72,7 @@ Bu veri denetimi aşamasında yalnızca yapısal sorunlar incelendi. Sütun baz�
 
 Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
 
-#### Vaka notebook'unun ayr?nt?l? bulgular?
+#### Vaka notebook'unun ayrıntılı bulguları
 
 Vaka Analizinde Yapılan İşlemler ve Bulgular
 - Temizlenmiş ülke verileri kullanıldı. Veri setinde 194 ülkeye ait 324.819 satır ve 67 sütun bulunduğu görüldü. Tarihler 1 Ocak 2020–14 Ağustos 2024 aralığındadır.
@@ -95,9 +95,8 @@ Vaka Analizinde Yapılan İşlemler ve Bulgular
 - Dashboard için haftalık çıktı tablosu hazırlandı. Mevcut vaka toplamı, veri kapsamı, haftalık değişimler, nüfusa göre vaka değeri ve hafta sonu kümülatif toplamı aynı tabloda birleştirildi.
 
 
-4:09 PM
 
-#### ?l?m notebook'unun ayr?nt?l? bulgular?
+#### Ölüm notebook'unun ayrıntılı bulguları
 
 - Temizlenmiş ülke verileri kullanıldı. Analizde yalnızca ülkeler yer aldı; ülke-tarih tekrarları temizlenmiş veri dosyasında bulunmamaktadır.
 
@@ -139,7 +138,7 @@ Vaka Analizinde Yapılan İşlemler ve Bulgular
 
 Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
 
-#### Yay?l?m ve hastane notebook'unun ayr?nt?l? bulgular?
+#### Yayılım ve hastane notebook'unun ayrıntılı bulguları
 
 ### R değeri ve önlem sıkılığı
 
@@ -186,7 +185,7 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 
 Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
 
-#### Test notebook'unun ayr?nt?l? bulgular?
+#### Test notebook'unun ayrıntılı bulguları
 
 ### Veri kapsamı ve test birimleri
 
@@ -229,7 +228,7 @@ Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. 
 
 Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
 
-#### A?? notebook'unun ayr?nt?l? bulgular?
+#### Aşı notebook'unun ayrıntılı bulguları
 
 - Temizlenmiş ülke verileri kullanıldı. Aşı analizi, `countries_clean.csv` içindeki ülke bazlı kayıtlara dayanır.
 
@@ -265,7 +264,7 @@ Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha
 
 Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
 
-#### Demografik ve ekonomik notebook'unun ayr?nt?l? bulgular?
+#### Demografik ve ekonomik notebook'unun ayrıntılı bulguları
 
 ### Veri kalitesi ve ülke profili
 
