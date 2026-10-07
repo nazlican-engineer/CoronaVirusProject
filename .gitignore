@@ -1,15 +1,8 @@
-# Local data exports
-/data/
-/dashboard/
-*.xlsx
-*.xls
-*.csv
-
-# Local editor and OS files
-.vscode/
-.DS_Store
-Thumbs.db
-
-# Python cache files
 __pycache__/
-*.pyc
+*.egg-info/
+.ipynb_checkpoints/
+.env
+.vscode/
+data/*
+!data/README.md
+dashboard/*_before_*.pbix
