@@ -4,38 +4,38 @@
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
 ![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
 
-> **Python, PostgreSQL ve Power BI ile hazırlanmış uçtan uca COVID-19 veri analizi projesi.**
+> **End-to-end COVID-19 data analysis project prepared with Python, PostgreSQL and Power BI.**
 >
-> Ülkelerin COVID-19 vaka, ölüm, hastane, test, aşılama ve demografik göstergelerini temizler, analiz eder ve etkileşimli bir Power BI dashboard'unda sunar.
+> It cleans, analyzes and presents countries' COVID-19 case, death, hospital, testing, vaccination and demographic indicators in an interactive Power BI dashboard.
 
 ![Vaka Analizi dashboard](dashboard/screenshots/01-vaka-analizi.png)
 
 ---
 
-## Projenin Amacı
+## Purpose of the Project
 
-COVID-19 verileri ülkeler arasında farklı sıklıkta, farklı kapsamda ve bazen eksik bildirilir. Bu proje, ülke karşılaştırmalarını doğrudan toplam sayılara dayandırmak yerine veri kalitesini ve ölçü tanımını da dikkate alarak daha anlamlı hâle getirmek için hazırlandı.
+COVID-19 data is reported at different frequencies, to different extents, and sometimes underreported across countries. This project was prepared to make country comparisons more meaningful by taking into account data quality and measurement definition rather than basing them directly on total numbers.
 
-Amaç; vaka, ölüm, test, aşılama, hastane ve demografik göstergeleri aynı analiz akışında incelemek; toplam sayılarla nüfusa göre değerleri birlikte sunmak ve sonuçların hangi veri sınırları içinde yorumlanması gerektiğini görünür kılmaktır.
+Aim; Examining case, death, test, vaccination, hospital and demographic indicators in the same analysis flow; The aim is to present total numbers together with values ​​according to population and to make it visible within which data limits the results should be interpreted.
 
 ---
 
-## Proje Özeti
+## Project Summary
 
-Bu proje COVID-19 verisini ülke düzeyinde iki ölçekte inceler:
+This project examines COVID-19 data at the country level at two scales:
 
-| Ölçek | Ne anlatır? |
+| Scale | What does it say? |
 |---|---|
-| **Mutlak değerler** | Toplam vaka, toplam ölüm ve belirli dönemdeki yeni kayıtlar |
-| **Nüfusa göre değerler** | Milyon kişi başına vaka, ölüm, hastane ve yoğun bakım yükü |
+| **Absolute values** | Total cases, total deaths and new records in a certain period |
+| **Values ​​by population** | Cases, deaths, hospital and intensive care burden per million population |
 
-Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabilir; milyon kişi başına değerler kullanıldığında ülke sıralaması değişebilir. Dashboard'daki Kıta, Ülke ve Tarih filtreleri bütün sayfalarda bu karşılaştırmayı daraltır.
+This distinction is important. Countries with large populations may stand out in total numbers; Country rankings may vary when using values ​​per million people. Continent, Country, and Date filters in the Dashboard narrow this comparison across all pages.
 
 ---
 
-## Öne Çıkan Bulgular
+## Highlighted Findings
 
-| Konu | Kısa bulgu | Ayrıntı |
+| Topic | Brief finding | Detail |
 |---|---|---|
 | Vaka | Toplam vakada ABD, Çin ve Hindistan öne çıkar; nüfusa göre hesaplama sıralamayı değiştirir. | [Vaka analizi](notebooks/cases_analysis.ipynb) |
 | Ölüm | Büyük nüfuslu ülkeler toplam ölümde öne çıkar; milyon kişi başına ölçü farklı ülkeleri öne taşır. | [Ölüm analizi](notebooks/deaths_analysis.ipynb) |
@@ -46,9 +46,9 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 
 ---
 
-## Notebook Rehberi
+## Notebook Guide
 
-| Dosya | Amaç | Analizde öne çıkan nokta |
+| File | Purpose | The highlight of the analysis |
 |---|---|---|
 | [data_audit_cleaning.ipynb](notebooks/data_audit_cleaning.ipynb) | Ham veriyi denetler, konumları ayırır ve temiz ülke tablosunu üretir. | Tekrar eden ülke-tarih kayıtları çelişki yoksa dolu değerler korunarak tekilleştirilir. |
 | [cases_analysis.ipynb](notebooks/cases_analysis.ipynb) | Vaka, haftalık değişim, eksik gün ve milyon kişi başına vaka analizi yapar. | Eksik gün sıfır sayılmaz; tam olmayan haftalar ülkeler arası karşılaştırmaya girmez. |
@@ -60,512 +60,512 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 
 ---
 
-## Notebook Bulguları
+## Notebook Findings
 
-### Veri Denetimi ve Temizlik
+### Data Audit and Cleansing
 
-- Veri setindeki konumlar; ana analiz ülkeleri, bölgeler/özel statülü konumlar, kıtalar, gelir grupları ile Dünya ve Avrupa Birliği toplamları olarak ayrıldı.
-- Western Sahara, Faroe Islands ve Birleşik Krallık alt bölgeleri gibi ülke olarak değerlendirilmemesi gereken konumlar `df_regions` içinde tutuldu.
-- `location` ve `date` sütunlarına göre tekrar eden kayıtlar bütün veri gruplarında kontrol edildi.
-- East Timor, Faroe Islands, gelir grupları ve Avrupa Birliği toplamlarında tekrar eden tarihli kayıtlar bulundu.
-- Tekrar eden kayıtların aynı tarih ve sütunda çelişkili dolu değerler içerip içermediği kontrol edildi.
-- Çelişkili değer bulunmadığı için tekrar eden kayıtlar, her sütundaki boş olmayan değer korunarak tekilleştirildi.
-- Tekilleştirme sonrasında tüm veri gruplarında kalan `location + date` tekrarı kontrol edildi.
-- Her konumun ilk ve son kayıt tarihi, kayıtlı gün sayısı ve bu aralıktaki eksik gün sayısı hesaplandı.
-- Northern Cyprus için 5 Aralık 2022 tarihinde bir günlük kayıt eksikliği tespit edildi.
-- Eksik tarih, sıfır vaka veya sıfır ölüm olarak yorumlanmadı; veri kalitesi notu olarak korundu.
-- Temizlenmiş veri dosyaları kaydedildi.
+- Locations in the data set; The main analysis was divided into countries, regions/locations with special status, continents, income groups, and World and European Union totals.
+- Locations that should not be considered countries, such as Western Sahara, Faroe Islands and United Kingdom sub-regions, were kept in `df_regions`.
+- Duplicate records according to `location` and `date` columns were checked in all data groups.
+- Duplicate dated records were found in East Timor, Faroe Islands, income groups and European Union totals.
+- Checked whether duplicate records contain contradictory filled values ​​in the same date and column.
+- Since there were no conflicting values, duplicate records were deduplicated by preserving the non-empty value in each column.
+- `location + date` repetition remaining in all data groups after deduplication was checked.
+- The first and last registration date of each location, the number of registered days and the number of missing days in this range were calculated.
+- A one-day record deficiency was detected for Northern Cyprus on December 5, 2022.
+- The missing date was not interpreted as zero cases or zero deaths; data quality grade was maintained.
+- Cleaned data files saved.
 
-Bu veri denetimi aşamasında yalnızca yapısal sorunlar incelendi. Sütun bazındaki eksik değerler, ilgili analiz notebook'larında değişkenin anlamına göre ayrıca değerlendirilecektir.
+Only structural issues were examined during this data audit phase. Missing values ​​on a column basis will be evaluated separately according to the meaning of the variable in the relevant analysis notebooks.
 
-### Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
-#### Vaka Notebook'unun Ayrıntılı Bulguları
+### Case and Death Burden: Absolute Value and Measurement Based on Population are Different
+#### Detailed Findings of the Case Notebook
 
-Vaka Analizinde Yapılan İşlemler ve Bulgular
-- Temizlenmiş ülke verileri kullanıldı. Veri setinde 194 ülkeye ait 324.819 satır ve 67 sütun bulunduğu görüldü. Tarihler 1 Ocak 2020–14 Ağustos 2024 aralığındadır.
-- Ülke–tarih tekrarları kontrol edildi. Temizlenmiş ülke tablosunda tekrar eden ülke–tarih kaydı bulunmadı.
-- total_cases sütunundaki eksik kayıtlar incelendi. Kısmen eksik verisi bulunan ülkelerde boşlukların ilk dolu kayıttan önce veya son dolu kayıttan sonra bulunduğu görüldü.
-- Kümülatif vaka sayısındaki azalmalar kontrol edildi. 16 ülke–tarih kaydında total_cases değerinin önceki kayda göre azaldığı tespit edildi.
-- Azalma tarihlerindeki günlük vaka kayıtları incelendi. Bu 16 kaydın tamamında new_cases değerinin boş olduğu görüldü. Bu durum, boş değerlerin azalmaya neden olduğunu kanıtlamaz. Azalmaların nedeni doğrulanmadığı için kaynak değerler korundu.
-- new_cases sütunundaki eksikler sınıflandırıldı. Başlangıçta, veri akışının ortasında ve sonda bulunan boşluklar ayrıldı. 16 ülkede dolu kayıtların arasında birer günlük boşluk bulundu.
-- Negatif günlük yeni vaka değerleri kontrol edildi. Yapılan kontrolde negatif new_cases kaydı bulunmadı.
-- Haftalık yeni vaka toplamları oluşturuldu. Günlük kayıtlar pazartesi–pazar dönemlerine ayrıldı ve mevcut günlük vaka değerleri toplandı. Tamamen boş haftaların toplamı NaN olarak korundu.
-- Haftaların veri kapsamı belirlendi. Her hafta için kayıtlı gün, dolu gün ve eksik gün sayıları hesaplandı. Yedi günlük vaka verisi dolu olan haftalar “tam hafta” olarak işaretlendi.
-- Eksik haftaların gösterim kuralı belirlendi. Eksik haftalarda mevcut günlerin toplamının, eksiklik açıklamasıyla birlikte gösterilmesine karar verildi. Hiç dolu kaydı olmayan haftalar “Veri yok” olarak etiketlendi.
-- Haftalık değişim hesaplandı. Artış ve azalışlar yalnızca birbirini izleyen iki tam hafta arasında hesaplandı. Önceki haftanın toplamı sıfır olduğunda yüzde değişim hesaplanmadı.
-- Nüfus bilgisi kontrol edildi. Eksik, sıfır veya negatif nüfus değeri bulunmadı. Aynı ülke içinde farklı nüfus değerine rastlanmadı.
-- Milyon kişi başına haftalık yeni vaka hesaplandı. Ülkelerin nüfus farklarını hesaba katmak için haftalık vaka toplamı nüfusa bölünüp bir milyonla çarpıldı. Son tablodaki bu gösterge yalnızca tam haftalar için tutuldu.
-- Türkiye’nin haftalık ve kümülatif vaka eğilimleri incelendi. Son dönemde yeni vakaların çoğunlukla sıfır olması, kümülatif toplamın yaklaşık 17 milyon seviyesinde yatay ilerlemesiyle uyumlu bulundu. Bu durum gerçek vaka oluşumunun tamamen durduğunu göstermez.
-- 4 Ağustos 2024 tarihli ülke karşılaştırması yapıldı. Toplam vakada ABD, Çin ve Hindistan; milyon kişi başına toplam vakada Brunei, San Marino ve Avusturya ilk üç sırada yer aldı. Nüfusa göre hesaplama ülke sıralamasını değiştirdi.
-- Ortak hafta için veri kapsamı incelendi. 8–14 Mayıs 2023 haftasında 194 ülkenin tamamında yedi günlük yeni vaka kaydı doluydu. Bu hafta için milyon kişi başına yeni vaka karşılaştırması hazırlandı. Dolu kayıtların bulunması, raporlamanın güncel olduğunu tek başına kanıtlamaz.
-- Hafta sonundaki kümülatif vaka değerleri eklendi. Her ülkenin pazar günündeki total_cases değeri alındı. Kümülatif değerler haftalık olarak toplanmadı; pazar değeri bulunamadığında eksik bırakıldı.
-- Dashboard için haftalık çıktı tablosu hazırlandı. Mevcut vaka toplamı, veri kapsamı, haftalık değişimler, nüfusa göre vaka değeri ve hafta sonu kümülatif toplamı aynı tabloda birleştirildi.
+Procedures and Findings in the Case Analysis
+- Cleaned country data was used. It was seen that the data set contained 324,819 rows and 67 columns belonging to 194 countries. Dates range from January 1, 2020–August 14, 2024.
+- Country–date duplications have been checked. No duplicate country-date records were found in the cleaned country table.
+- Missing records in the total_cases column were examined. In countries with partially missing data, gaps were found before the first full record or after the last full record.
+- Decreases in the number of cumulative cases were checked. It was found that in 16 country–date records, the total_cases value decreased compared to the previous record.
+- Daily case records on the decrease dates were examined. It was seen that the new_cases value was empty in all 16 records. This does not prove that null values ​​cause reduction. Since the cause of the decreases was not confirmed, the source values ​​were retained.
+- Missing items in the new_cases column have been classified. Spaces were reserved at the beginning, in the middle of the data stream, and at the end. A one-day gap was found between filled records in 16 countries.
+- Negative daily new case values ​​were checked. No negative new_cases records were found during the check.
+- Weekly new case totals were created. Daily records were divided into Monday–Sunday periods and current daily case values ​​were collected. The total of completely empty weeks was maintained as NaN.
+- The data scope of the weeks was determined. The number of registered days, full days and missing days were calculated for each week. Weeks with full seven-day case data were marked as “full weeks”.
+- The display rule for missing weeks has been determined. It was decided to display the total of available days in missing weeks along with the explanation of the deficiency. Weeks with no occupied records were labeled “No data.”
+- Weekly change calculated. Increases and decreases were calculated only between two consecutive full weeks. Percentage change was not calculated when the previous week's total was zero.
+- Population information has been checked. No missing, zero or negative population values ​​were found. No different population values ​​were found within the same country.
+- Weekly new cases per million people were calculated. To account for country population differences, the weekly case total was divided by the population and multiplied by one million. This indicator in the last chart was kept for full weeks only.
+- Turkey's weekly and cumulative case trends were examined. The fact that new cases have been mostly zero recently was found to be compatible with the horizontal progress of the cumulative total at approximately 17 million. This does not indicate that the actual occurrence of cases has completely stopped.
+- Country comparison was made as of August 4, 2024. USA, China and India in total cases; Brunei, San Marino and Austria were in the top three places in total cases per million people. Calculation by population changed the country ranking.
+- Reviewed data coverage for the common week. During the week of May 8–14, 2023, all 194 countries had a full seven-day record of new cases. A comparison of new cases per million people has been prepared for this week. The presence of complete records does not alone prove that reporting is current.
+- Cumulative case values ​​over the weekend have been added. The total_cases value of each country on Sunday was taken. Cumulative values ​​were not collected weekly; It was left incomplete when its market value could not be found.
+- Weekly output table was prepared for Dashboard. Current case total, data coverage, weekly changes, case value by population and weekend cumulative total were combined in the same table.
 
 ![Vaka karşılaştırması](docs/figures/01-vaka-karsilastirma.png)
-#### Türkiye'de Vaka Eğrileri
+#### Case Curves in Türkiye
 
 ![Türkiye haftalık yeni vaka](docs/figures/01a-turkiye-haftalik-vaka.png)
 
-Türkiye'de haftalık yeni vaka sayısı 2022 başında en yüksek seviyeye ulaşır. 2023 sonrasında serinin sıfıra yaklaşması, bu dönemde düzenli vaka bildiriminin sona erdiğini gösterir; sıfır vaka anlamına gelmez.
+The weekly number of new cases in Türkiye will reach its highest level at the beginning of 2022. If the series approaches zero after 2023, this indicates the end of regular case reporting in this period; It does not mean zero cases.
 
 ![Türkiye kümülatif vaka](docs/figures/01b-turkiye-kumulatif-vaka.png)
 
-Kümülatif vaka eğrisi yalnızca yukarı yönlü ilerler. Eğrinin dikleştiği dönemler, yeni vaka bildirimlerinin hızlandığı dalgalardır.
+The cumulative incidence curve only moves upward. Periods when the curve steepens are waves in which new case notifications accelerate.
 
 ![Milyon kişi başına haftalık vaka](docs/figures/01d-haftalik-vaka-milyon-basina.png)
 
-8–14 Mayıs 2023 haftasında Brunei başta olmak üzere küçük nüfuslu ülkeler milyon kişi başına haftalık vakada üst sıradadır. Bu görsel, toplam sayı ile nüfusa göre ölçünün farklı sıralamalar ürettiğini gösterir.
+In the week of 8–14 May 2023, countries with small populations, especially Brunei, are at the top in weekly cases per million people. This visual shows that the total count and the measure by population produce different rankings.
 
 
-> **Nasıl hesapladık?** Günlük vaka sayılarını haftalara topladık. Bir haftada gün eksikse, o haftayı ülkeleri karşılaştırırken kullanmadık.
+> **How ​​did we calculate?** We summed the daily case numbers into weeks. If a week was missing a day, we did not use that week when comparing countries.
 
-4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkar. Milyon kişi başına hesaplama ise nüfus büyüklüğünün etkisini azaltır ve sıralamayı değiştirebilir. Bu nedenle dashboard'da mutlak değerler ile kişi başına ölçüler birlikte sunulur.
+The United States, China, and India are highlighted in the total number of cases reported as of August 4, 2024. Calculating per million people reduces the effect of population size and may change the ranking. For this reason, absolute values ​​and per capita measurements are presented together on the dashboard.
 
-#### Ölüm Notebook'unun Ayrıntılı Bulguları
+#### Detailed Findings of the Death Notebook
 
-- Temizlenmiş ülke verileri kullanıldı. Analizde yalnızca ülkeler yer aldı; ülke-tarih tekrarları temizlenmiş veri dosyasında bulunmamaktadır.
+- Cleaned country data was used. Only countries were included in the analysis; Country-date duplications are not present in the cleaned data file.
 
-- `total_deaths` sütununun veri kapsamı incelendi. Kısmen eksik kümülatif ölüm kayıtlarındaki boşluklar veri akışının başında veya sonunda bulunmuştur. Dolu ölüm kayıtlarının arasında eksik `total_deaths` kaydı tespit edilmemiştir.
+- The data scope of the `total_deaths` column has been examined. Gaps in partially incomplete cumulative death records were found at the beginning or end of the data stream. No missing `total_deaths` records were detected among the full death records.
 
-- Kümülatif ölüm sayısındaki azalmalar kontrol edildi. 9 ülke-tarih kaydında `total_deaths` değerinin önceki kayda göre azaldığı görüldü.
+- Decreases in the cumulative number of deaths were checked. It was observed that the `total_deaths` value in 9 country-date records decreased compared to the previous record.
 
-- Kümülatif ölümün azaldığı 9 tarihin tamamında `new_deaths` değeri eksikti. Bu birliktelik, eksik günlük ölüm kaydının azalmanın nedeni olduğunu kanıtlamaz. Azalmaların kaynak düzeltmesi veya veri sorunu olup olmadığı doğrulanmadığı için kaynak değerler korundu.
+- The `new_deaths` value was missing on all 9 dates when cumulative deaths decreased. This association does not prove that incomplete daily death registration is the cause of the decline. Source values ​​were retained because it was not verified whether the reductions were source corrections or data issues.
 
-- `new_deaths` sütunundaki eksik kayıtlar başta, arada ve sonda olarak sınıflandırıldı. Australia, Canada, Chile, China, Indonesia, Panama, Papua New Guinea, Sierra Leone ve Thailand için dolu kayıtların arasında birer günlük eksik ölüm kaydı bulundu.
+- Missing records in the `new_deaths` column were classified as first, middle and last. A one-day missing death record was found among full records for Australia, Canada, Chile, China, Indonesia, Panama, Papua New Guinea, Sierra Leone and Thailand.
 
-- Negatif `new_deaths` kaydı bulunmadı.
+- No negative `new_deaths` records found.
 
-- Günlük yeni ölüm kayıtları pazartesi–pazar dönemlerine göre haftalık olarak gruplandı. Her ülke ve hafta için mevcut ölüm toplamı, dolu gün sayısı ve eksik gün sayısı hesaplandı.
+- Daily new death records were grouped weekly according to the periods Monday–Sunday. The current death total, number of full days, and number of missing days were calculated for each country and week.
 
-- Tam haftalar, eksik gün içeren haftalar ve hiç veri bulunmayan haftalar `veri_durumu` sütunuyla etiketlendi. Eksik haftalarda yalnızca mevcut günlerin toplamı korundu; bu değer tam haftanın toplamı gibi yorumlanmadı.
+- Complete weeks, weeks with missing days, and weeks with no data are labeled with the `data_status` column. In missing weeks, only the total of available days was preserved; This value was not interpreted as the total for the full week.
 
-- Haftalık ölüm farkı ve yüzde değişimi yalnızca birbirini izleyen iki tam hafta için hesaplandı. Önceki haftanın ölüm toplamı sıfır olduğunda yüzde değişimi boş bırakıldı.
+- Weekly mortality difference and percentage change were calculated for two consecutive full weeks only. The percentage change was left blank when the previous week's death total was zero.
 
-- Haftalık ölüm değerleri milyon kişi başına hesaplandı. Eksik haftalardaki mevcut gün toplamı ile yalnızca tam haftalara ait güvenilir karşılaştırma değeri ayrı sütunlarda tutuldu.
+- Weekly death values ​​were calculated per million people. The current day total for incomplete weeks and the reliable comparison value for complete weeks only were kept in separate columns.
 
-- Her haftanın pazar günündeki `total_deaths` değeri hafta sonu kümülatif ölüm olarak eklendi. Kümülatif ölüm değerleri haftalık olarak toplanmadı.
+- The `total_deaths` value on Sunday of each week has been added as cumulative deaths over the weekend. Cumulative mortality values ​​were not collected weekly.
 
-- Türkiye için haftalık bildirilen ölüm ve kümülatif ölüm eğrileri incelendi. Eksik haftalar grafikte ayrı işaretlenebilecek biçimde hazırlandı.
+- Weekly reported death and cumulative death curves for Türkiye were examined. Missing weeks were prepared so that they could be marked separately on the chart.
 
-- 4 Ağustos 2024 tarihinde toplam bildirilen ölüm sayısında ABD, Brezilya ve Hindistan; milyon kişi başına toplam ölümde Peru, Bulgaristan ve Kuzey Makedonya ilk sıralarda yer aldı. Nüfusa göre hesaplama ülke sıralamasını değiştirmektedir.
+- USA, Brazil and India in total number of reported deaths on August 4, 2024; Peru, Bulgaria and North Macedonia ranked first in total deaths per million people. Calculation by population changes the country ranking.
 
-- Ortak hafta için veri kapsamı incelendi. 19–25 Haziran 2023 haftasında 194 ülkenin tamamında yedi günlük ölüm verisi bulundu. Bu hafta için milyon kişi başına haftalık ölüm karşılaştırması hazırlandı.
+- Reviewed data coverage for the common week. Seven-day death data was found for all 194 countries for the week of June 19–25, 2023. A comparison of weekly deaths per million people has been prepared for this week.
 
-- Dashboard için `weekly_deaths.csv` tablosu oluşturuldu. Bu tablo; mevcut ölüm toplamı, veri durumu, haftalık değişim, milyon kişi başına değerler ve hafta sonu kümülatif ölüm bilgisini içerir.
+- `weekly_deaths.csv` table was created for Dashboard. This table; Includes current death total, data status, weekly change, values ​​per million people, and weekend cumulative deaths.
 
-- Fazla ölüm verisi, dashboard planında yer almadığı için bu projenin analiz kapsamına alınmadı.
+- Excessive death data was not included in the analysis of this project because it was not included in the dashboard plan.
 
 ![Ölüm karşılaştırması](docs/figures/02-olum-karsilastirma.png)
-#### Türkiye'de Ölüm Eğrileri
+#### Death Curves in Türkiye
 
 ![Türkiye haftalık yeni ölüm](docs/figures/02a-turkiye-haftalik-olum.png)
 
-Türkiye'de haftalık yeni ölüm grafiği, tam hafta ve eksik gün içeren haftaları ayırır. En yüksek ölüm dalgaları 2021 ile 2022 başında görülür.
+The weekly new death chart in Türkiye separates weeks with full weeks and weeks with missing days. The highest waves of deaths occur in 2021 and early 2022.
 
 ![Türkiye kümülatif ölüm](docs/figures/02b-turkiye-kumulatif-olum.png)
 
-Kümülatif ölüm eğrisindeki hızlı yükselişler salgın dalgalarıyla ilişkilidir. Son dönemdeki yataylaşma, bildirilen ölüm sayısındaki artışın azalmasını gösterir.
+Rapid rises in the cumulative mortality curve are associated with epidemic waves. The recent flattening indicates a decrease in the increase in the number of reported deaths.
 
 ![Milyon kişi başına haftalık ölüm](docs/figures/02d-haftalik-olum-milyon-basina.png)
 
-19–25 Haziran 2023 haftasında milyon kişi başına yeni ölüm sıralaması, toplam ölüm sayısından farklı ülkeleri öne çıkarır. Bu nedenle ölüm yükünü nüfusa göre de incelemek gerekir.
+A ranking of new deaths per million people for the week of June 19–25, 2023 highlights different countries from the total number of deaths. Therefore, it is necessary to examine the burden of death according to population.
 
 
-> **Nasıl hesapladık?** Eksik günleri sıfır ölüm gibi göstermedik. Haftalık değişimi yalnızca verisi tam olan iki hafta arasında hesapladık.
+> **How ​​did we calculate?** We did not show the missing days as zero deaths. We calculated weekly change only between two weeks with complete data.
 
-Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
+The same distinction is seen in mortality data. While countries with large populations stand out in the absolute number of reported deaths, the ranking of deaths per million people puts countries as diverse as Peru, Bulgaria and North Macedonia ahead. These images show the reported results; It alone does not measure the success of outbreak management due to differences in data coverage and reporting.
 
-### Yayılım ve Hastane Yükü
-#### Yayılım ve Hastane Notebook'unun Ayrıntılı Bulguları
+### Spread and Hospital Burden
+#### Spread and Detailed Findings of the Hospital Notebook
 
-#### R Değeri ve Önlem Sıkılığı
+#### R Value and Precautionary Stringency
 
-- `reproduction_rate`, salgının yayılma hızını gösterir. `R > 1` yayılımın artma, `R < 1` ise yavaşlama eğiliminde olduğunu ifade eder.
-- R değeri 191 ülkede bulunmuştur. Her ülkenin R verisinin aktif kayıt aralığında aradaki günler eksiksizdir.
-- R verisi kaynakta çoğunlukla 2 Ocak 2023 sonrasında bulunmadığı için R grafikleri bu tarih sonrasını kapsamamaktadır.
-- 2 Ocak 2023 tarihinde 191 ülkenin R değeri birlikte bulunduğundan, ülkeler arası R karşılaştırması bu tarih üzerinden yapılmıştır.
-- `stringency_index`, hükümetlerin okul/iş yeri kapanmaları, seyahat kısıtları ve benzeri önlemlerinin sıkılığını 0–100 aralığında gösterir.
-- İtalya örneğinde R değeri ve önlem sıkılığı 24 Şubat 2020–31 Aralık 2022 arasında birlikte incelenmiştir.
-- Bazı dönemlerde daha yüksek önlem sıkılığı ile daha düşük R değeri birlikte gözlense de bu durum nedensellik kanıtlamaz. Aşılama, varyantlar, test kapasitesi, davranış değişiklikleri ve önlemlerin gecikmeli etkisi de salgının yayılımını etkiler.
+- `reproduction_rate` shows the rate of spread of the epidemic. `R > 1` indicates that the spread tends to increase, and `R < 1` indicates that the spread tends to slow down.
+- R value has been found in 191 countries. The days in between are complete within the active recording range of each country's R data.
+- Since R data is mostly not available in the source after January 2, 2023, R charts do not cover this date.
+- Since the R value of 191 countries was found together on January 2, 2023, the R comparison between countries was made on this date.
+- `stringency_index` shows the stringency of governments' measures such as school/workplace closures, travel restrictions and similar measures, in the range of 0–100.
+- In the example of Italy, R value and precautionary stringency were examined together between 24 February 2020 and 31 December 2022.
+- Although higher precautionary stringency and lower R value are observed together in some periods, this does not prove causality. Vaccination, variants, testing capacity, behavioral changes and the delayed impact of measures also affect the spread of the epidemic.
 
-#### Hastane ve Yoğun Bakım Yükü
+#### Hospital and Intensive Care Burden
 
-- `hosp_patients` ve `icu_patients`, belirli bir tarihte hastanede ve yoğun bakımda bulunan COVID-19 hasta sayılarını gösterir.
-- Hastane hasta verisi 36 ülkede, yoğun bakım hasta verisi 38 ülkede bulunmuştur. Her iki göstergeyi birlikte paylaşan ülke sayısı 32’dir.
-- Bazı ülkelerde hastane veya yoğun bakım verisinin aktif tarih aralığında boş günler bulunmaktadır. Bu boşluklar sıfır ile doldurulmamıştır.
-- Hastane ve yoğun bakım verisi aktif döneminde kesintisiz olan 16 ülke belirlenmiştir. Uzun dönem zaman grafikleri için bu ülkeler tercih edilmelidir.
-- İtalya; hastane ve yoğun bakım verisinin aynı tarih aralığında, 24 Şubat 2020–7 Ağustos 2024 arasında kesintisiz olması nedeniyle örnek zaman grafiği için kullanılmıştır.
-- Ülkeler arası karşılaştırmada ham hasta sayısı yerine `hosp_patients_per_million` ve `icu_patients_per_million` kullanılmıştır. Böylece nüfus büyüklüğünün karşılaştırmayı yanıltması önlenmiştir.
-- Milyon kişi başına değerler, ham hasta sayısı ve nüfus üzerinden yapılan hesaplamalarla tutarlıdır.
-- 13 Şubat 2022 tarihinde 30 ülkenin hem hastane hem yoğun bakım verisi birlikte bulunmuştur. Bu tarihte Bulgaristan, milyon kişi başına hastane ve yoğun bakım hasta yükünde en yüksek ülkeler arasında yer almıştır.
-- Bulgaristan’daki yüksek hastane yükü, Ocak sonu ve Şubat 2022’deki yüksek vaka ve ölüm yüküyle aynı döneme denk gelmektedir. Ancak bu durum tek başına sağlık sistemi kapasitesi veya tek bir faktörle açıklanamaz.
+- `hosp_patients` and `icu_patients` show the number of COVID-19 patients in hospital and intensive care on a specific date.
+- Hospital patient data was found in 36 countries, intensive care patient data was found in 38 countries. The number of countries sharing both indicators together is 32.
+- In some countries, there are empty days in the active date range of hospital or intensive care data. These spaces are not filled with zeros.
+- 16 countries with uninterrupted hospital and intensive care data during the active period were identified. These countries should be preferred for long-term time charts.
+- Italy; It was used for the sample time chart because the hospital and intensive care data are uninterrupted within the same date range, 24 February 2020–7 August 2024.
+- In comparison between countries, `hosp_patients_per_million` and `icu_patients_per_million` were used instead of the raw number of patients. Thus, population size was prevented from misleading the comparison.
+- Values ​​per million people are consistent with calculations based on the raw number of patients and the population.
+- On February 13, 2022, both hospital and intensive care data of 30 countries were found together. On this date, Bulgaria was among the countries with the highest hospital and intensive care patient load per million population.
+- The high hospital load in Bulgaria coincides with the high case and death load in late January and February 2022. However, this cannot be explained by the health system capacity or a single factor alone.
 
-#### Haftalık Yatış ve Yatak Kapasitesi Göstergeleri
+#### Weekly Hospitalization and Bed Capacity Indicators
 
-- `weekly_hosp_admissions` ve `weekly_icu_admissions`, kaynak tarafından bildirilen haftalık hastane ve yoğun bakım yatış göstergeleridir.
-- Bu göstergeler yalnızca sınırlı sayıda ülkede bulunur ve ülkeler arasında günlük veya haftalık farklı kayıt sıklıklarıyla paylaşılmıştır.
-- Bu nedenle haftalık yatış göstergeleri yeniden toplanmamış, ana ülkeler arası karşılaştırmada kullanılmamıştır. Gerekirse seçili ülke detayında kaynak tarafından bildirilen değer olarak gösterilebilir.
-- `hospital_beds_per_thousand`, bin kişi başına hastane yatağı kapasitesini gösteren sabit bir ülke bilgisidir. Günlük zaman serisi olarak değil, ülke bağlam göstergesi olarak kullanılacaktır.
+- `weekly_hosp_admissions` and `weekly_icu_admissions` are weekly hospital and intensive care admission indicators reported by the source.
+- These indicators are only available in a limited number of countries and are shared between countries with different recording frequencies, daily or weekly.
+- For this reason, weekly hospitalization indicators were not re-collected and were not used in comparisons between main countries. If necessary, it can be displayed as the value reported by the source in the selected country detail.
+- `hospital_beds_per_thousand` is a fixed country information showing hospital bed capacity per thousand people. It will be used as a country context indicator, not as a daily time series.
 
-#### Dashboard Kararları
+#### Dashboard Decisions
 
-- R değeri için ülke karşılaştırması ve seçili ülke zaman grafiği sunulabilir; veri kapsamının 2023 başında bittiği belirtilmelidir.
-- Hastane ve yoğun bakım zaman grafikleri yalnızca yeterli ve kesintisiz veri bulunan ülkeler için gösterilmelidir.
-- Ülke karşılaştırmalarında milyon kişi başına hastane ve yoğun bakım göstergeleri kullanılmalıdır.
-- Veri bulunmayan günler sıfır kabul edilmeyecek, grafiklerde boşluk olarak korunacaktır.
-- Bu bölüm için ayrı bir işlenmiş CSV oluşturulmasına gerek yoktur; dashboard günlük göstergeleri `countries_clean.csv` dosyasından kullanabilir.
+- Country comparison and selected country time chart for R value can be presented; It should be noted that data coverage ends at the beginning of 2023.
+- Hospital and intensive care time graphs should only be shown for countries with sufficient and uninterrupted data.
+- Hospital and intensive care indicators per million population should be used in country comparisons.
+- Days with no data will not be considered zero and will be preserved as spaces in the graphs.
+- There is no need to create a separate processed CSV for this section; dashboard can use daily indicators from `countries_clean.csv` file.
 
 ![İtalya'da hastane ve yoğun bakım yükü](docs/figures/03-italya-hastane-yogun-bakim.png)
-#### Yayılım ve Hastane İçin Ek Görseller
+#### Additional Images for Spread and Hospital
 
 ![İtalya R değeri ve önlem sıkılığı](docs/figures/03b-italya-r-ve-onlem.png)
 
-İtalya örneğinde R değeri ile önlem sıkılığı aynı zaman ekseninde görülür. R değerinin 1 çizgisinin üstünde olması yayılımın artma eğiliminde olduğunu gösterir; bu grafik tek başına önlemlerin etkisini kanıtlamaz.
+In the Italian example, the R value and the stringency of measures are seen on the same time axis. An R value above the 1 line indicates that the spread tends to increase; This graph alone does not prove the effectiveness of the measures.
 
 ![Ülkelere göre R değeri](docs/figures/03c-r-degeri-ulke-karsilastirma.png)
 
-2 Ocak 2023 tarihinde Kosova, Bolivya ve Lübnan en yüksek R değerleri arasındadır. Kesikli çizgi R = 1 eşiğini gösterir.
+On January 2, 2023, Kosovo, Bolivia, and Lebanon are among the highest R values. The dashed line indicates the threshold R = 1.
 
 ![Hastane ve yoğun bakım yükü](docs/figures/03d-hastane-ybu-karsilastirma.png)
 
-13 Şubat 2022'de Bulgaristan, Sırbistan ve Romanya hastanede yatan kişi sayısında öne çıkar. Hastane ve yoğun bakım yükleri milyon kişi başına gösterildiği için ülkeler karşılaştırılabilir.
+On February 13, 2022, Bulgaria, Serbia and Romania stand out in the number of hospitalized people. Since hospital and intensive care burdens are shown per million people, countries can be compared.
 
 
-> **Nasıl hesapladık?** Hasta sayılarını ülkelerin nüfusuna göre karşılaştırdık. Veri vermeyen ülkeleri ve boş günleri sıfır kabul etmedik. R değeri verisi 02.01.2023'te bitiyor.
+> **How ​​did we calculate?** We compared the number of patients according to the population of the countries. We did not accept countries that did not provide data and empty days as zero. R value data ends on 02.01.2023.
 
-Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
+Series of patients in hospital and intensive care show the burden on a given day. In the Italian case, the two load indicators fluctuate together; The intensive care curve moves in lower but similar epidemic waves. This data is only available for countries that share hospital data; Free days are not considered zero.
 
-### Test Verisinin Yorumu
-#### Test Notebook'unun Ayrıntılı Bulguları
+### Interpretation of Test Data
+#### Detailed Findings of Test Notebook
 
-#### Veri Kapsamı ve Test Birimleri
+#### Data Scope and Test Units
 
-- `total_tests` 172 ülkede, `new_tests` 142 ülkede, `new_tests_smoothed` 169 ülkede ve `positive_rate` 162 ülkede bulunmaktadır.
-- Test birimi bilgisi 176 ülkede vardır.
-- 138 ülke `tests performed`, 23 ülke `people tested`, 14 ülke `samples tested` ve 1 ülke `units unclear` test birimini kullanmaktadır.
-- Hiçbir ülkede zaman içinde birden fazla test birimi görülmemiştir. Bu nedenle her ülkenin kendi zaman serisinde test ölçüm birimi tutarlıdır.
-- Farklı test birimleri aynı ölçümü temsil etmediği için ham `total_tests` ve `new_tests` değerleri bütün ülkeler arasında doğrudan karşılaştırılmamalıdır.
+- `total_tests` is available in 172 countries, `new_tests` is available in 142 countries, `new_tests_smoothed` is available in 169 countries and `positive_rate` is available in 162 countries.
+- Test unit information is available in 176 countries.
+- 138 countries use `tests performed`, 23 countries use `people tested`, 14 countries use `samples tested` and 1 country uses `units unclear` test unit.
+- No country has seen more than one testing unit over time. Therefore, the test measurement unit is consistent in each country's own time series.
+- Raw `total_tests` and `new_tests` values ​​should not be directly compared between all countries as different test units do not represent the same measurement.
 
-#### Toplam ve Günlük Test Verisi
+#### Total and Daily Test Data
 
-- `total_tests` kümülatif test sayısında azalış görülmemiştir. Test verisi bulunan dönemlerde kümülatif toplamlar mantıksal olarak artmaktadır.
-- `total_tests` ve `new_tests` boşluklarının çoğu veri serisinin başlangıç veya bitiş döneminde bulunur. Aktif raporlama dönemindeki boşluklar sınırlıdır.
-- `new_tests` alanında negatif değer bulunmamıştır.
-- `new_tests` verisi bulunan 142 ülkenin 122’sinde kayıtlar çoğunlukla günlük aralıklarla paylaşılmıştır.
-- Daha seyrek raporlama yapan veya yalnızca az sayıda test kaydı bulunan ülkeler de vardır. Bu nedenle haftalık test toplamları yalnızca 7 günün tamamında `new_tests` verisi bulunan haftalar için hesaplanmıştır.
-- Eksik gün içeren haftalar sıfırla doldurulmamış, `tam_hafta` ve `veri_durumu` alanlarıyla etiketlenmiştir.
+- There was no decrease in the number of cumulative tests in `total_tests`. Cumulative totals logically increase in periods where test data is available.
+- Most of the `total_tests` and `new_tests` gaps are found in the beginning or ending period of the data series. Gaps in the active reporting period are limited.
+- No negative values ​​were found in the `new_tests` field.
+- In 122 of the 142 countries with `new_tests` data, records were shared mostly at daily intervals.
+- There are also countries that report less frequently or have only a small number of testing records. Therefore, weekly test totals are calculated only for weeks with `new_tests` data on all 7 days.
+- Weeks with missing days are not filled with zeros, but are labeled with `full_week` and `data_status` fields.
 
-#### Pozitiflik Oranı ve Test/Vaka Oranı
+#### Positivity Rate and Test/Case Ratio
 
-- `positive_rate` değerlerinin tamamı 0–1 aralığındadır; mantıksal sınır dışında değer bulunmamıştır.
-- Pozitiflik oranı eksikliklerinin çoğu raporlamanın başlangıç veya bitiş dönemindedir. Aktif dönem içindeki boşluklar sınırlı olduğundan seçili ülke zaman grafikleri için uygundur.
-- `tests_per_case` alanında sıfır veya negatif değer bulunmamıştır.
-- Seçili ülke örneğinde bazı dönemlerde test yoğunluğu düşerken pozitiflik oranı yükselmiştir. Bu durum testlerin daha çok riskli kişilere uygulanması, test kapasitesi veya artan bulaş ile ilişkili olabilir; grafik tek başına nedensellik göstermez.
+- All `positive_rate` values ​​are in the range 0–1; No values ​​were found outside the logical limit.
+- Most positivity rate gaps are in the beginning or ending period of reporting. It is suitable for selected country time charts as the gaps within the active period are limited.
+- There are no zero or negative values ​​in the `tests_per_case` field.
+- In the selected country example, the positivity rate increased while the testing intensity decreased in some periods. This may be related to the application of tests to more risky people, testing capacity or increased transmission; The graph alone does not show causality.
 
-#### Ülkeler Arası Karşılaştırma ve Dashboard
+#### Cross-Country Comparison and Dashboard
 
-- Pozitiflik oranı, ham test sayısına göre ülkeler arasında daha uygun bir karşılaştırma göstergesidir.
-- En fazla ortak pozitiflik oranı bulunan tarih 20 Mart 2022’dir; bu tarihte 136 ülkenin pozitiflik oranı bulunmaktadır.
-- Karşılaştırma grafiğinde yalnızca `tests performed` kullanan 107 ülke kullanılmıştır.
-- Seçili ülke zaman grafiğinde milyon kişi başına düzeltilmiş test yoğunluğu ile pozitiflik oranı ayrı panellerde gösterilmiştir.
-- Dashboard için `weekly_tests.csv` tablosu oluşturulmuştur. Haftalık test kartı yalnızca `tam_hafta = True` olan kayıtlarda kullanılmalıdır.
-- Test birimi, veri durumu ve son gözlem tarihi dashboard’da kullanıcıya gösterilmelidir.
+- The positivity rate is a more appropriate indicator of comparison between countries than the raw number of tests.
+- The date with the highest common positivity rate is March 20, 2022; On this date, 136 countries have a positivity rate.
+- Only 107 countries using `tests performed` are used in the comparison chart.
+- In the selected country time chart, the corrected testing intensity and positivity rate per million people are shown in separate panels.
+- `weekly_tests.csv` table has been created for Dashboard. The weekly test card should only be used on records where `full_week=True`.
+- The test unit, data status and last observation date should be displayed to the user on the dashboard.
 
 ![Birleşik Arap Emirlikleri test ve pozitiflik serisi](docs/figures/04-bae-test-pozitiflik.png)
-#### Pozitiflik Oranı Karşılaştırması
+#### Positivity Rate Comparison
 
 ![En yüksek test pozitiflik oranları](docs/figures/04b-pozitiflik-orani-karsilastirma.png)
 
-20 Mart 2022'de en yüksek pozitiflik oranları Gürcistan ve Hollanda'da görülür. Pozitiflik oranı test yoğunluğu ve raporlama kapsamıyla birlikte yorumlanmalıdır.
+On March 20, 2022, the highest positivity rates are seen in Georgia and the Netherlands. The positivity rate should be interpreted in conjunction with testing intensity and reporting scope.
 
 
-> **Nasıl hesapladık?** Ülkeleri adil karşılaştırmak için sadece yapılan test sayısını bildiren ülkeleri kullandık. Eksik günleri doldurmadık.
+> **How ​​did we calculate?** To compare countries fairly, we only used countries that reported the number of tests performed. We did not fill in the missing days.
 
-Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
+Test intensity and positivity rate are not reported with the same frequency in every country. This example makes visible changes in the test series and interruptions in positivity reporting. In cross-country test comparisons, only countries using the `tests performed` unit are evaluated; Data reporting as number of individuals or samples do not represent the same scale.
 
-### Aşılama, Vaka ve Ölüm Eğrileri
-#### Aşı Notebook'unun Ayrıntılı Bulguları
+### Vaccination, Case and Mortality Curves
+#### Detailed Findings of the Vaccine Notebook
 
-- Temizlenmiş ülke verileri kullanıldı. Aşı analizi, `countries_clean.csv` içindeki ülke bazlı kayıtlara dayanır.
+- Cleaned country data was used. Vaccine analysis is based on country-by-country records in `countries_clean.csv`.
 
-- Toplam doz, en az bir doz olan kişi, tam aşılı kişi, booster ve aşı oranı sütunlarının ülke bazındaki veri kapsamı incelendi.
+- Country-based data coverage of total dose, person with at least one dose, fully vaccinated person, booster and vaccination rate columns was examined.
 
-- Tam aşılama oranı verisinin birçok ülkede günlük ve kesintisiz yayımlanmadığı görüldü. Eksik kayıtlar başlangıçta, veri akışının arasında ve sonunda bulunabilmektedir.
+- It has been observed that full vaccination rate data is not published daily and uninterruptedly in many countries. Missing records can be found at the beginning, between and at the end of the data flow.
 
-- Eksik aşı oranları sıfırla doldurulmadı. Boş kayıt, o gün hiç aşılama yapılmadığı şeklinde yorumlanmadı.
+- Missing vaccination rates were not filled with zeros. A blank record was not interpreted as no vaccinations taking place that day.
 
-- Negatif toplam doz, ilk doz kişi, tam aşılı kişi veya booster kaydı bulunmadı.
+- No negative total dose, first dose person, fully vaccinated person or booster records were found.
 
-- Tam aşılı kişi sayısının en az bir doz olmuş kişi sayısını geçtiği mantıksal olarak çelişkili kayıt bulunmadı.
+- No logically contradictory records were found in which the number of fully vaccinated people exceeded the number of people who received at least one dose.
 
-- `total_vaccinations`, `people_vaccinated`, `people_fully_vaccinated` ve `total_boosters` sütunlarında zaman içinde azalma tespit edilmedi.
+- No decrease over time was detected in the `total_vaccinations`, `people_vaccinated`, `people_fully_vaccinated` and `total_boosters` columns.
 
-- Günlük düzenli kayıt şartı yerine, her ülke için haftalık aşı gözlem tablosu oluşturuldu.
+- Instead of the daily regular registration requirement, a weekly vaccination observation table was created for each country.
 
-- Her haftada hem ilk doz hem tam aşılama oranının birlikte bulunduğu son kayıt `gozlem_tarihi` olarak seçildi. Bu gözlemin hafta sonuna göre gecikmesi `gozlem_gecikmesi_gun` sütununda tutuldu.
+- The last record containing both the first dose and the full vaccination rate in each week was selected as 'observation_date'. The delay of this observation compared to the weekend was kept in the `observation_delay_day` column.
 
-- Bir haftada iki aşı oranı birlikte bulunmuyorsa oranlar boş bırakıldı ve `veri_durumu` alanında “Aşı oranı verisi yok” olarak işaretlendi.
+- If two vaccination rates were not found together in a week, the rates were left blank and marked as "No vaccination rate data" in the 'data_status' field.
 
-- Ortak haftada ilk doz ve tam aşılama oranları ülkeler arasında karşılaştırıldı. Karşılaştırmada yalnızca iki oranı da bulunan ülkeler kullanıldı.
+- First dose and full vaccination rates in the common week were compared between countries. Only countries with both rates were used in the comparison.
 
-- Türkiye için aşılama oranı, haftalık yeni vaka ve haftalık yeni ölüm eğrileri aynı zaman ekseninde gösterildi. Bu grafikler zaman içindeki beraber değişimi gösterir; tek başına nedensel etki kanıtlamaz.
+- Vaccination rate, weekly new cases and weekly new death curves for Türkiye were shown on the same time axis. These graphs show the change over time; does not prove a causal effect on its own.
 
-- Dashboard için `weekly_vaccinations.csv` tablosu oluşturuldu. Tablo; haftalık aşı oranlarını, gerçek gözlem tarihini, gözlem gecikmesini ve veri durumunu içerir.
+- `weekly_vaccinations.csv` table was created for Dashboard. Table; includes weekly vaccination rates, actual observation date, observation delay, and data status.
 
 ![Türkiye'de aşılama, vaka ve ölüm eğilimleri](docs/figures/05-turkiye-asi-vaka-olum.png)
-#### Aşı Kapsamı ve İlerleyişi
+#### Vaccine Scope and Progress
 
 ![Ülkelere göre aşı kapsamı](docs/figures/05a-asi-kapsami-karsilastirma.png)
 
-6–12 Eylül 2021 haftasında Birleşik Arap Emirlikleri ve Katar en az bir doz ile tam aşılı oranlarında üst sıradadır. Mavi çubuk en az bir doz, yeşil çubuk tam aşılı oranını gösterir.
+For the week of September 6–12, 2021, the United Arab Emirates and Qatar are at the top of the list in terms of fully vaccinated rates with at least one dose. Blue bar indicates at least one dose, green bar indicates fully vaccinated rate.
 
 ![Türkiye aşı ilerleyişi](docs/figures/05b-turkiye-asi-ilerlemesi.png)
 
-Türkiye'de en az bir doz ve tam aşılı oranı 2021 boyunca yükselir, ardından yataylaşır. Serideki boşluklar veri eksikliğidir; sıfır aşılama değildir.
+The rate of at least one dose and fully vaccinated in Türkiye increases throughout 2021 and then flattens out. Gaps in the series are missing data; It is not zero vaccination.
 
 
-> **Nasıl hesapladık?** Her hafta için ülkelerin en güncel aşı oranını aldık. Veri yoksa o haftayı boş bıraktık; sıfır aşı yapılmış gibi göstermedik.
+> **How ​​did we calculate?** We got the countries' most up-to-date vaccination rate for each week. If data was not available, we left that week blank; We did not present it as if zero vaccination was done.
 
-Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
+The rate of at least one dose and full vaccination in Türkiye increased throughout 2021 and then plateaued. Display on the same time axis as the case and death curves describes how the periods change together. This image is not evidence of a causal vaccine effect; Factors such as variants, level of testing, age structure and reporting also play a role.
 
-### Demografik ve Ekonomik İlişkiler
-#### Demografik ve Ekonomik Notebook'unun Ayrıntılı Bulguları
+### Demographic and Economic Relations
+#### Detailed Findings of the Demographic and Economic Notebook
 
-#### Veri Kalitesi ve Ülke Profili
+#### Data Quality and Country Profile
 
-- Demografik, ekonomik, sağlık riski ve altyapı göstergeleri ülke bazında sabit bilgiler olarak incelenmiştir.
-- Sabit göstergelerde zaman içinde birden fazla farklı değer ve tanımlanan mantıksal sınırların dışında anormal kayıt bulunmamıştır.
-- Her ülke için tek satırlık `country_profile` tablosu oluşturulmuştur.
-- Bir ülkenin bir göstergesi eksikse, ülke yalnızca o göstergenin kullanıldığı analizden çıkarılmıştır. Tüm göstergeleri eksik olmadığı sürece ülke analizden tamamen çıkarılmamıştır.
+- Demographic, economic, health risk and infrastructure indicators were examined as fixed information on a country basis.
+- There are no more than one different value in fixed indicators over time and no abnormal records outside the defined logical limits.
+- A single-row `country_profile` table has been created for each country.
+- If a country was missing an indicator, the country was excluded from the analysis where only that indicator was used. The country is not completely excluded from the analysis unless all indicators are missing.
 
-#### Ölüm ve Aşılanma Karşılaştırmaları
+#### Mortality and Vaccination Comparisons
 
-- Milyon kişi başına toplam COVID-19 ölümü için en geniş ortak kapsam, 4 Ağustos 2024 tarihinde 194 ülkede bulunmuştur.
-- Tam aşılama oranı için en geniş ortak kapsam, 16 Ağustos 2021 tarihinde 106 ülkede bulunmuştur.
-- Ölüm ve aşılama göstergeleri için farklı tarihler kullanılmıştır; her gösterge kendi en geniş ülke kapsamına sahip tarihte değerlendirilmiştir.
+- The largest common coverage for total COVID-19 deaths per million people was found in 194 countries on August 4, 2024.
+- The widest common coverage for the full vaccination rate was found in 106 countries on August 16, 2021.
+- Different dates were used for mortality and vaccination indicators; Each indicator was evaluated on its broadest country coverage date.
 
-#### Ana İlişkiler
+#### Main Relationships
 
-- Logaritmik kişi başına GDP ile milyon kişi başına toplam COVID-19 ölümü arasında orta düzeyde pozitif ilişki görülmüştür (`r = 0.498`, 186 ülke).
-- 65 yaş üstü nüfus oranı ile milyon kişi başına toplam COVID-19 ölümü arasında güçlü pozitif ilişki görülmüştür (`r = 0.683`, 182 ülke).
-- HDI ile tam aşılama oranı arasında güçlü pozitif ilişki görülmüştür (`r = 0.741`, 105 ülke).
-- HDI düzeyi yüksek ülkelerde tam aşılama oranları genel olarak daha yüksektir. Bu ilişki; sağlık altyapısı, gelir, lojistik kapasite ve aşı erişimi gibi birlikte değişen faktörleri yansıtabilir.
+- A moderate positive relationship was seen between logarithmic GDP per capita and total COVID-19 deaths per million people (`r = 0.498`, 186 countries).
+- A strong positive relationship was observed between the proportion of the population over 65 years of age and total COVID-19 deaths per million people (`r = 0.683`, 182 countries).
+- A strong positive relationship was observed between HDI and complete vaccination rate (`r = 0.741`, 105 countries).
+- Full vaccination rates are generally higher in countries with high HDI levels. This relationship; It may reflect co-varying factors such as health infrastructure, income, logistics capacity and vaccine access.
 
-#### Yardımcı Göstergeler
+#### Auxiliary Indicators
 
-- Ortanca yaş ve 70 yaş üstü nüfus oranı da milyon kişi başına toplam ölümle güçlü pozitif ilişki göstermiştir.
-- Kadın sigara oranı, el yıkama imkânı ve yaşam beklentisi bazı ülkelerde ölüm göstergesiyle pozitif ilişki göstermiştir. Bu sonuçlar doğrudan nedensel etki olarak yorumlanmamalıdır.
-- Aşırı yoksulluk oranı ile bildirilen COVID-19 ölümü arasında negatif ilişki görülmüştür. Ülkeler arası raporlama farkı, yaş yapısı, sağlık hizmetine erişim ve gelişmişlik düzeyi bu ilişkiyi etkileyebilir.
-- Diyabet yaygınlığı ve logaritmik nüfus yoğunluğu ile milyon kişi başına toplam ölüm arasında çok zayıf ilişki görülmüştür.
+- Median age and the proportion of the population over 70 years of age also showed a strong positive association with total deaths per million people.
+- Female smoking rate, hand washing facilities and life expectancy have shown a positive relationship with the mortality indicator in some countries. These results should not be interpreted as a direct causal effect.
+- A negative relationship was observed between the extreme poverty rate and reported COVID-19 deaths. Differences in reporting between countries, age structure, access to healthcare and level of development may affect this relationship.
+- A very weak relationship was observed between diabetes prevalence and logarithmic population density and total deaths per million people.
 
-#### Korelasyon Isı Haritası
+#### Correlation Heat Map
 
-- Korelasyon ısı haritasında GDP, HDI, yaşlı nüfus oranı ve yaşam beklentisinin birbiriyle güçlü ilişkiler taşıdığı görülmüştür.
-- Isı haritasında tüm seçili göstergeleri eksiksiz bulunan 69 ülke kullanılmıştır.
-- Korelasyonlar ülke düzeyindeki birliktelikleri gösterir; bireysel risk, nedensel etki veya politika başarısı olarak yorumlanmamalıdır.
+- In the correlation heat map, it was seen that GDP, HDI, elderly population rate and life expectancy had strong relationships with each other.
+- 69 countries with all selected indicators were used in the heat map.
+- Correlations show associations at the country level; individual risk should not be interpreted as causal impact or policy success.
 
-#### Dashboard Kararları
+#### Dashboard Decisions
 
-- Dashboard’da GDP–ölüm, 65 yaş üstü nüfus–ölüm ve HDI–tam aşılama için üç dağılım grafiği kullanılacaktır.
-- Korelasyon ısı haritası, seçili demografik ve ekonomik göstergelerin birlikte incelenmesi için kullanılacaktır.
-- Grafiklerde her nokta bir ülkeyi temsil eder.
-- Regression veya tahmin modeli bu projenin kapsamına alınmamıştır.
+- Three scatter plots will be used in the Dashboard for GDP–deaths, population over 65 years of age–deaths and HDI–full vaccination.
+- The correlation heat map will be used to examine selected demographic and economic indicators together.
+- Each dot in the graphs represents a country.
+- Regression or prediction model is not included in the scope of this project.
 
 ![Demografik, ekonomik ve COVID-19 korelasyonları](docs/figures/06-demografik-korelasyon.png)
-#### Demografik Dağılım Grafikleri
+#### Demographic Scatter Plots
 
 ![Demografik ve ekonomik göstergeler](docs/figures/06a-demografik-dagilim.png)
 
-Bu üç dağılım grafiği kişi başı GSYH, 65 yaş üstü nüfus ve HDI ile milyon kişi başına ölüm arasındaki ilişkiyi gösterir. Her nokta bir ülkedir; noktaların yoğunlaşması benzer değerlere sahip daha fazla ülke olduğunu anlatır.
+These three scatter plots show the relationship between GDP per capita, population over 65, and HDI and deaths per million people. Every point is a country; A concentration of points indicates that there are more countries with similar values.
 
 
-> **Nasıl hesapladık?** Her ülkeyi tek bir profil ile karşılaştırdık. Bir bilgi eksikse o ülkeyi yalnızca ilgili grafikten çıkardık. Bu grafikler ilişkiyi gösterir, neden-sonuç göstermez.
+> **How ​​did we calculate?** We compared each country with a single profile. If any information was missing, we simply removed that country from the relevant graph. These graphs show relationship, not cause and effect.
 
-Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
+Country-level correlation analysis showed a moderate positive relationship between log GDP per capita and deaths per million people (`r = 0.498`, 186 countries). The relationship between the proportion of the population over 65 years of age and deaths per million people was stronger (`r = 0.683`, 182 countries). There was also a strong positive relationship between HDI and complete vaccination rate (`r = 0.741`, 105 countries). These relationships do not indicate causality; Co-varying social, demographic, and reporting factors may influence results.
 
 ---
 
-## SQL ile Veri Doğrulama ve Analiz Yaklaşımı
+## Data Validation and Analysis Approach with SQL
 
 SQL, Python ile hazırlanan temiz ve haftalık tabloların PostgreSQL içinde kontrol edilmesi ve tekrar analiz edilmesi için kullanılır. Sorguların tamamı [sql/03_analysis_queries.sql](sql/03_analysis_queries.sql) dosyasındadır.
 
-### Tablo Yapısı
+### Table Structure
 
 - [01_create_schema.sql](sql/01_create_schema.sql), proje tablolarını ayrı bir COVID şemasında tutar.
 - [02_create_tables.sql](sql/02_create_tables.sql), günlük temiz ülke verisi ile haftalık vaka, ölüm, test ve aşı tablolarını oluşturur.
-- Günlük countries_clean tablosunda location + date birincil anahtardır. Böylece aynı ülke ve tarih için ikinci bir kayıt eklenemez.
-- Haftalık tablolarda eksik gün, dolu gün, tam hafta ve veri durumu alanları korunur. Böylece analizde hangi kayıtların güvenle karşılaştırıldığı görülür.
+- In the daily countries_clean table location + date is the primary key. Thus, a second record cannot be added for the same country and date.
+- Missing day, full day, full week and data status fields are preserved in weekly tables. In this way, it is seen which records are compared with confidence in the analysis.
 
-### Önce Kontrol, Sonra Karşılaştırma
+### Check First, Compare Then
 
-SQL sorguları önce kayıt sayısını, ülke sayısını, tarih aralığını, tekrar eden kayıtları ve her değişkenin veri kapsamını kontrol eder. Bu adım, notebook'ta hazırlanan temiz tabloların PostgreSQL'e doğru aktarıldığını doğrular.
+SQL queries first check the number of records, number of countries, date range, duplicate records, and data scope of each variable. This step verifies that the clean tables prepared in the notebook are imported correctly into PostgreSQL.
 
-Haftalık sonuçlarda yalnızca tam hafta verisi kullandık. Bir ülkede haftanın bir günü eksikse o ülke o haftanın küresel toplamına katılmaz. Bu nedenle “en yüksek küresel hafta” sonuçları, tüm ülkelerin değil **tam veri bildiren ülkelerin kaydedilen toplamını** gösterir.
+We used only full week data in the weekly results. If a country is missing a day of the week, that country is not included in the global total for that week. Therefore, the “highest global week” results show the **recorded total of countries reporting full data**, not all countries.
 
-### Vaka ve Ölüm Sorgularında İzlenen Yol
+### Procedure Followed in Case and Death Inquiries
 
-- Vaka ve ölüm için önce en yüksek küresel haftalar bulundu.
-- Aynı haftada ülkelerin dünya toplamındaki payı hesaplandı.
-- Mutlak toplamların yanında milyon kişi başına değerler de sıralandı; böylece nüfus etkisi azaltıldı.
-- Çok küçük ülkelerin aşırı değerlerle sıralamayı bozmasını azaltmak için bazı zirve karşılaştırmalarında nüfusu en az 1 milyon olan ülkeler kullanıldı.
-- Çin'in Aralık 2022'deki sıra dışı vaka haftası önce tek başına incelendi, ardından Çin hariç küresel karşılaştırma yapıldı.
-- Şili ve Ekvador'daki ani ölüm sıçramaları günlük kayıtlarla kontrol edildi.
-- Tek haftalık toplu bildirimlerin etkisini azaltmak için ülkelerin 4 haftalık hareketli ortalama ölüm yükü de hesaplandı.
+- First, the highest global weeks for cases and deaths were found.
+- In the same week, the share of countries in the world total was calculated.
+- Besides absolute totals, values ​​per million people were also listed; thus reducing the population impact.
+- Countries with a population of at least 1 million were used in some peak comparisons to reduce very small countries being disrupted by extreme values.
+- China's unusual week of cases in December 2022 was first examined individually, then a global comparison was made excluding China.
+- Sudden death spikes in Chile and Ecuador were checked with daily records.
+- To reduce the impact of single-week aggregate notifications, the 4-week moving average death burden of countries was also calculated.
 
-### Test Verisi Kararı
+### Test Data Decision
 
-Test verisinde yapılan test sayısı, test edilen kişi sayısı ve örnek sayısı aynı ölçü değildir. Bu yüzden ham test toplamları bütün ülkeler arasında doğrudan karşılaştırılmadı. Ortak test sıralamalarında yalnızca **yapılan test sayısı** birimini kullanan ülkeler seçildi.
+In test data, the number of tests performed, the number of people tested, and the number of samples are not the same measure. Therefore, raw test totals were not directly compared across all countries. Only countries using the **number of tests performed** unit were selected in common testing rankings.
 
-Test ile vakayı doğrudan bölerek bulunan “100 test başına vaka” sonucu bazı ülkelerde 100'ü aşabildi. Test ve vaka bildirimleri aynı kişiyi veya aynı raporlama zamanını temsil etmediği için bu ölçü güvenilir kabul edilmedi. Bunun yerine kaynaktan gelen pozitiflik oranı, günlük test yoğunluğu ve kayıtlı gün sayısı birlikte değerlendirildi.
+The "cases per 100 tests" result, found by directly dividing the test by the case, could exceed 100 in some countries. This measure was not considered reliable because testing and case reports did not represent the same person or the same reporting time. Instead, the positivity rate from the source, daily test density and the number of recorded days were evaluated together.
 
-### Aşı Karşılaştırması Kararı
+### Vaccine Comparison Decision
 
-Aşı oranları her ülkede her gün yayımlanmadığı için, her hafta ülkenin son geçerli aşı gözlemi kullanıldı. Boş günler sıfır aşılanma olarak yorumlanmadı.
+Since vaccination rates are not published every day in every country, the country's last valid vaccination observation was used each week. Off days were not interpreted as zero vaccination.
 
-Ülkeler, ortak veri kapsamının yüksek olduğu 6 Eylül 2021 haftasında tam aşılama oranına göre düşük, orta ve yüksek grup olarak ayrıldı. Sonraki 12 haftadaki milyon kişi başına ölüm oranları karşılaştırıldı. Orta kapsama grubunun düşük kapsama grubundan daha yüksek çıkması; yaş yapısı, dalganın zamanı, sağlık sistemi ve eksik bildirim gibi başka etkenlerin sonucu etkilediğini gösterir. Bu analiz nedensellik kanıtı değildir.
+Countries were divided into low, medium and high groups according to the full vaccination rate in the week of September 6, 2021, when common data coverage was high. Death rates per million people over the next 12 weeks were compared. The medium coverage group is higher than the low coverage group; It shows that other factors, such as age structure, time of wave, health system, and underreporting, influence the outcome. This analysis is not evidence of causality.
 
 
 ---
 
-## Dashboard Görselleri
+## Dashboard Images
 
-### Vaka Analizi
+### Case Analysis
 
 ![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
 
-Bu sayfa, seçilen dönemde vaka sayılarının nasıl değiştiğini gösterir.
+This page shows how case numbers have changed over the selected period.
 
-- **Dönemlik Yeni Vaka:** Seçilen tarihlerde bildirilen yeni vakaların toplamı.
-- **Kümülatif Vaka:** Her ülkenin ulaştığı son toplam vaka sayısı.
-- **Milyon Kişi Başına Vaka:** Toplam vakanın ülke nüfusuna göre karşılaştırılmış hâli.
-- **Eksik Gün:** Yeni vaka bilgisi olmayan gün sayısıdır; sıfır vaka anlamına gelmez.
+- **Seasonal New Case:** The total of new cases reported on the selected dates.
+- **Cumulative Cases:** The latest total number of cases reached by each country.
+- **Cases Per Million People:** Total cases compared to the country's population.
+- **Missing Days:** The number of days without new case information; It does not mean zero cases.
 
-Aylık çizgi grafik salgın dalgalarını, çubuk grafik ülkeleri nüfusa göre karşılaştırır, harita ise yükün ülkeler arasındaki dağılımını gösterir.
+The monthly line chart compares epidemic waves, the bar chart compares countries by population, and the map shows the distribution of the burden among countries.
 
-### Ölüm Analizi
+### Death Analysis
 
 ![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
 
-Bu sayfa, seçilen dönemdeki ölüm yükünü vaka sayılarıyla birlikte yorumlamaya yardım eder.
+This page helps interpret the death burden in the selected period along with the number of cases.
 
-- **Dönemlik Yeni Ölüm:** Seçilen tarihlerdeki yeni ölüm toplamı.
-- **Kümülatif Ölüm:** Her ülkenin son bildirilen toplam ölüm değeri.
-- **Milyon Başına Ölüm:** Ölüm yükünün nüfusa göre karşılaştırılmış hâli.
-- **Vaka Ölüm Oranı:** Kümülatif ölümün kümülatif vakaya oranı.
+- **Seasonal New Deaths:** Total of new deaths for the selected dates.
+- **Cumulative Death:** The last reported total death value of each country.
+- **Deaths per Million:** Comparison of the burden of death according to population.
+- **Case Fatality Rate:** The ratio of cumulative deaths to cumulative cases.
 
-Çizgi grafik yıllara göre aylık ölümleri, sütun grafik kıtalardaki dağılımı, harita ise nüfusa göre ölüm yükünü gösterir.
+The line chart shows monthly deaths by year, the column chart shows the distribution in continents, and the map shows the burden of death by population.
 
-### Yayılım ve Hastane
+### Propagation and Hospital
 
 ![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
 
-Bu sayfa, salgının yayılma hızını ve sağlık sistemi üzerindeki yükü birlikte gösterir.
+This page shows the spread of the epidemic together with the burden on the healthcare system.
 
-- **R Değeri:** Bir hastanın ortalama kaç kişiye hastalığı bulaştırdığını gösterir. R 1'in üzerindeyse yayılım artma eğilimindedir.
-- **Hastane / YBÜ Verisi Veren Ülke:** Bu alanlarda en az bir kayıt paylaşan ülke sayısıdır.
-- **R Verisinin Kaynakta Bittiği Tarih:** R değerinin son bulunduğu gündür.
+- **R Value:** It shows how many people a patient infects on average. If R is above 1, the spread tends to increase.
+- **Country Providing Hospital / ICU Data:** It is the number of countries that share at least one record in these fields.
+- **Date When R Data Ends at the Source:** This is the day when the R value was last found.
 
-Hastane/YBÜ seçim kutusundan gösterilecek hasta türü seçilir. Grafik, veri paylaşan ülkelerin milyon kişi başına günlük ortalamasını verir.
+The patient type to be displayed is selected from the Hospital/ICU selection box. The chart shows the daily average per million people for countries that share data.
 
-### Test Analizi
+### Test Analysis
 
 ![Test Analizi](dashboard/screenshots/04-test-analizi.png)
 
-Bu sayfa, test yoğunluğu ve pozitiflik oranını inceler.
+This page examines testing intensity and positivity rate.
 
-- **Test Verisi Veren Ülke:** En az bir toplam test kaydı bulunan ülke sayısı.
-- **Ortalama Pozitiflik Oranı:** Veri paylaşan ülkelerdeki pozitiflik oranlarının ortalaması.
-- **Test Son Gözlem Tarihi:** Test verisinin kaynakta son bulunduğu tarih.
+- **Country Providing Test Data:** The number of countries with at least one total test record.
+- **Average Positivity Rate:** Average of positivity rates in countries sharing data.
+- **Test Last Observation Date:** The date the test data was last found in the source.
 
-Çubuk grafik bin kişi başına kümülatif testte ilk 10 ülkeyi gösterir. Test karşılaştırmasına yalnızca aynı birimde, yani yapılan test sayısı olarak veri bildiren ülkeler girer.
+The bar chart shows the top 10 countries in cumulative testing per thousand people. Only countries that report data in the same unit, i.e. the number of tests performed, are included in the testing comparison.
 
-### Aşı Analizi
+### Vaccine Analysis
 
 ![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
 
-Bu sayfa, aşılanmanın zaman içindeki ilerleyişini yeni vaka ve ölüm eğrileriyle birlikte gösterir.
+This page shows vaccination progress over time, along with new case and death curves.
 
-- **En Az Bir Doz Oranı:** Nüfusa göre en az bir doz aşı olanların oranı.
-- **Tam Aşılı Oranı:** Nüfusa göre tam aşılı kişilerin oranı.
-- **Aşı Verisi Veren Ülke:** En az bir aşı kaydı paylaşan ülke sayısı.
-- **Yeni Vaka / Yeni Ölüm:** Seçilen tarihlerdeki toplam yeni vaka ve ölüm sayıları.
+- **At least One Dose Rate:** The rate of those who have at least one dose of vaccine according to the population.
+- **Fully Vaccinated Rate:** The rate of fully vaccinated people according to the population.
+- **Country Providing Vaccination Data:** The number of countries that share at least one vaccination record.
+- **New Case / New Death:** Total number of new cases and deaths on the selected dates.
 
-Aşı oranında her ülkenin o tarihe kadarki son bilinen değeri kullanılır. Böylece o gün veri paylaşmayan ülkeler yüzünden oran yapay olarak düşmez.
+The last known value of each country up to that date is used in the vaccination rate. This way, the rate won't drop artificially because of countries not sharing data on that day.
 
-### Demografik ve Ekonomik Analiz
+### Demographic and Economic Analysis
 
 ![Demografik ve Ekonomik Analiz](dashboard/screenshots/06-demografik-ekonomik.png)
 
-Bu sayfa, ülkelerin demografik ve ekonomik göstergeleri ile milyon kişi başına ölüm yükü arasındaki ilişkiyi gösterir.
+This page shows the relationship between countries' demographic and economic indicators and the burden of death per million people.
 
-- **Ortalama Yaşam Beklentisi, Kişi Başı GSYH ve Medyan Yaş:** Seçilen ülkelerin ortalama değerleri.
-- Her nokta bir ülkeyi, renkler ise kıtaları temsil eder.
-- Grafiklerde GSYH, medyan yaş ve insani gelişmişlik endeksi ile ölüm yükü birlikte incelenir.
+- **Average Life Expectancy, GDP Per Capita and Median Age:** Average values ​​of selected countries.
+- Each dot represents a country and the colors represent continents.
+- In the graphs, GDP, median age, human development index and death burden are examined together.
 
-Bu noktaların yakın veya uzak olması ilişkiyi anlatır; tek başına bir göstergenin ölümlere neden olduğunu kanıtlamaz.
+Whether these points are close or far apart tells about the relationship; It does not prove that an indicator alone causes deaths.
 
 ---
 
-## Veri Kaynağı
+## Data Source
 
 Veri, [Our World in Data COVID-19 veri sayfasından](https://ourworldindata.org/coronavirus) alınır. Our World in Data tarafından üretilen veri ve görselleştirmeler, atıf koşuluyla CC BY lisansındadır; üçüncü taraf kaynaklı alanların kendi lisansları ayrıca kontrol edilmelidir.
 
-## Proje Akışı
+## Project Flow
 
 ```text
-Ham veri → veri denetimi ve temizleme → haftalık / analiz tabloları
+Raw data → data audit and cleaning → weekly / analysis tables
         → PostgreSQL sorguları → Power BI dashboard
 ```
 
-## Teknolojiler
+## Technologies
 
-- **Python:** veri inceleme, temizlik ve analiz notebook'ları
-- **PostgreSQL / SQL:** şema, tablo tanımları ve analiz sorguları
-- **Power BI:** etkileşimli rapor, DAX ölçüleri ve filtreler
+- **Python:** data review, cleaning and analysis notebooks
+- **PostgreSQL / SQL:** schema, table definitions and analysis queries
+- **Power BI:** interactive report, DAX measures and filters
 
-## Klasör Yapısı
+## Folder Structure
 
 ```text
 covid-analysis/
 ├── README.md
 ├── .gitignore
 ├── pyproject.toml
-├── src/              # data_loader.py
-├── notebooks/        # denetim, temizlik ve analiz notebook'ları
-├── sql/              # şema ve analiz sorguları
-├── dashboard/        # .pbix, tema ve ekran görüntüleri
-├── docs/             # ölçüler, doğrulamalar ve metodoloji notları
-├── data/             # yalnızca README.md sürüm kontrolünde
-└── outputs/          # yerel üretilen tablolar ve görseller
+├── src/ # data_loader.py
+├── notebooks/ # inspection, cleaning and analysis notebooks
+├── sql/ # schema and analysis queries
+├── dashboard/ # .pbix, theme and screenshots
+├── docs/ # metrics, validations and methodology notes
+├── data/ # only in README.md version control
+└── outputs/ # locally produced charts and images
 ```
 
-## Kurulum ve Çalıştırma
+## Installation and Operation
 
-1. Depoyu klonlayın ve Python ortamını oluşturun.
-2. Bağımlılıkları `pyproject.toml` üzerinden kurun.
-3. Kaynak veriyi `data/raw/` altına yerel olarak indirin.
-4. Önce `notebooks/data_audit_cleaning.ipynb` notebook'unu çalıştırın.
-5. Diğer notebook'ları analiz sırasına göre çalıştırın.
-6. Power BI içinde `dashboard/covid19_dashboard.pbix` dosyasını açın; veri kaynağı yolunu kendi yerel `data/processed/` klasörünüze göre güncelleyin.
+1. Clone the repository and create the Python environment.
+2. Install the dependencies via `pyproject.toml`.
+3. Download the source data locally under `data/raw/`.
+4. First run notebook `notebooks/data_audit_cleaning.ipynb`.
+5. Run other notebooks in analysis order.
+6. Open the `dashboard/covid19_dashboard.pbix` file in Power BI; Update the data source path to your local `data/processed/` folder.
 
 Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına bakın.
 
-## Önemli Hesaplama Kararları
+## Important Calculation Decisions
 
-- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır. Veri kaynağında ülke statüsünde listelenen tüm konumlar ülke birimi olarak kabul edilir.
-- Eksik gözlemler sıfır kabul edilmez; kartlarda ve grafiklerde boş kalır.
-- Haftalık analizlerde tam hafta kuralı uygulanır.
-- Kümülatif değerler, ülkeler için son geçerli değerin alınmasıyla hesaplanır; günlük satırlar toplanmaz.
-- Oranlar ve kişi başına değerler ülkeler arasında doğrudan toplanmaz; ölçüye uygun ağırlıklı ya da ülke ortalaması yaklaşımı kullanılır.
-- Demografik grafikler ülke düzeyindedir; ilişkiler nedensellik kanıtı değildir.
+- Taiwan, Kosovo, Hong Kong and Palestine are treated as separate country units in the analysis. All locations listed with country status in the data source are considered country units.
+- Missing observations are not considered zero; remains blank on cards and charts.
+- In weekly analysis, the full week rule is applied.
+- Cumulative values ​​are calculated by taking the last valid value for countries; daily lines are not collected.
+- Rates and per capita values ​​are not directly aggregated across countries; A conservatively weighted or country average approach is used.
+- Demographic charts are at country level; relationships are not evidence of causation.
 
-## Sınırlamalar
+## Limitations
 
-- R değeri kaynağı 02.01.2023 tarihinde sona erer.
-- Hastane ve YBÜ göstergeleri yalnızca veri paylaşan birkaç düzine ülkeyi kapsar.
-- Test ve aşı serilerinde bildirim farkları, eksik günler ve geriye dönük düzeltmeler bulunabilir.
-- Ülkeler arası karşılaştırmalarda veri kalitesi ile raporlama kapsamı sonuçları etkileyebilir.
+- R value source ends on 02.01.2023.
+- Hospital and ICU indicators cover only a few dozen countries that share data.
+- There may be reporting differences, missing days and retrospective corrections in test and vaccine series.
+- In cross-country comparisons, data quality and reporting scope may affect the results.
 
-## Lisans
+## Licence
 
 Bu proje [MIT License](LICENSE) ile lisanslanmıştır.
