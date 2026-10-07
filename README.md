@@ -10,7 +10,7 @@ Notebook'lar, dashboard'da özetlenen ölçülerin veri kalitesi kontrollerini v
 
 ![Vaka karşılaştırması](docs/figures/01-vaka-karsilastirma.png)
 
-4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkarken; milyon kişi başına toplam vakada Brunei, San Marino ve Avusturya ilk sıralardadır. Bu nedenle ülkeleri yalnızca mutlak vaka sayısıyla sıralamak nüfus büyüklüğünün etkisini taşır; dashboard'da kişi başına ölçüler ayrıca sunulur.
+4 Ağustos 2024 itibarıyla bildirilen toplam vaka sayısında Amerika Birleşik Devletleri, Çin ve Hindistan öne çıkar. Milyon kişi başına hesaplama ise nüfus büyüklüğünün etkisini azaltır ve sıralamayı değiştirebilir. Bu nedenle dashboard'da mutlak değerler ile kişi başına ölçüler birlikte sunulur.
 
 ![Ölüm karşılaştırması](docs/figures/02-olum-karsilastirma.png)
 
@@ -88,7 +88,6 @@ Ham veri → veri denetimi ve temizleme → haftalık / analiz tabloları
 ```text
 covid-analysis/
 ├── README.md
-├── LICENSE
 ├── .gitignore
 ├── pyproject.toml
 ├── src/              # data_loader.py
@@ -96,7 +95,7 @@ covid-analysis/
 ├── sql/              # şema ve analiz sorguları
 ├── dashboard/        # .pbix, tema ve ekran görüntüleri
 ├── docs/             # ölçüler, doğrulamalar ve metodoloji notları
-├── data/             # yalnızca README.md ve .gitkeep sürüm kontrolünde
+├── data/             # yalnızca README.md sürüm kontrolünde
 └── outputs/          # yerel üretilen tablolar ve görseller
 ```
 
@@ -113,7 +112,7 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 
 ## Önemli Hesaplama Kararları
 
-- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır.
+- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır. Ülke olarak veri kaynağının ülke olarak listelediği konumlar alınır.
 - Eksik gözlemler sıfır kabul edilmez; kartlarda ve grafiklerde boş kalır.
 - Haftalık analizlerde tam hafta kuralı uygulanır.
 - Kümülatif değerler, ülkeler için son geçerli değerin alınmasıyla hesaplanır; günlük satırlar toplanmaz.
@@ -126,7 +125,3 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 - Hastane ve YBÜ göstergeleri yalnızca veri paylaşan birkaç düzine ülkeyi kapsar.
 - Test ve aşı serilerinde bildirim farkları, eksik günler ve geriye dönük düzeltmeler bulunabilir.
 - Ülkeler arası karşılaştırmalarda veri kalitesi ile raporlama kapsamı sonuçları etkileyebilir.
-
-## Lisans
-
-Kod ve proje dokümantasyonu [MIT License](LICENSE) ile sunulur. Veri kullanımında kaynak lisansları ayrıca geçerlidir.
