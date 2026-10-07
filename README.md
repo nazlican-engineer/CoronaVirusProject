@@ -1,5 +1,9 @@
 # COVID-19 Analysis Dashboard
 
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=white)
+![Power BI](https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black)
+
 > **Python, PostgreSQL ve Power BI ile hazırlanmış uçtan uca COVID-19 veri analizi projesi.**
 >
 > Ülkelerin COVID-19 vaka, ölüm, hastane, test, aşılama ve demografik göstergelerini temizler, analiz eder ve etkileşimli bir Power BI dashboard'unda sunar.
@@ -58,7 +62,7 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 
 ## Notebook Bulguları
 
-## • Veri Denetimi ve Temizlik
+### Veri Denetimi ve Temizlik
 
 - Veri setindeki konumlar; ana analiz ülkeleri, bölgeler/özel statülü konumlar, kıtalar, gelir grupları ile Dünya ve Avrupa Birliği toplamları olarak ayrıldı.
 - Western Sahara, Faroe Islands ve Birleşik Krallık alt bölgeleri gibi ülke olarak değerlendirilmemesi gereken konumlar `df_regions` içinde tutuldu.
@@ -70,11 +74,11 @@ Bu ayrım önemlidir. Büyük nüfuslu ülkeler toplam sayılarda öne çıkabil
 - Her konumun ilk ve son kayıt tarihi, kayıtlı gün sayısı ve bu aralıktaki eksik gün sayısı hesaplandı.
 - Northern Cyprus için 5 Aralık 2022 tarihinde bir günlük kayıt eksikliği tespit edildi.
 - Eksik tarih, sıfır vaka veya sıfır ölüm olarak yorumlanmadı; veri kalitesi notu olarak korundu.
-- Temizlenmiş veri dosyalarını kaydedildi.
+- Temizlenmiş veri dosyaları kaydedildi.
 
 Bu veri denetimi aşamasında yalnızca yapısal sorunlar incelendi. Sütun bazındaki eksik değerler, ilgili analiz notebook'larında değişkenin anlamına göre ayrıca değerlendirilecektir.
 
-## • Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
+### Vaka ve Ölüm Yükü: Mutlak Değer ile Nüfusa Göre Ölçü Farklıdır
 #### Vaka Notebook'unun Ayrıntılı Bulguları
 
 Vaka Analizinde Yapılan İşlemler ve Bulgular
@@ -171,10 +175,10 @@ Kümülatif ölüm eğrisindeki hızlı yükselişler salgın dalgalarıyla ili�
 
 Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısında büyük nüfuslu ülkeler öne çıkarken, milyon kişi başına ölüm sıralaması Peru, Bulgaristan ve Kuzey Makedonya gibi farklı ülkeleri öne taşır. Bu görseller bildirilen sonuçları gösterir; veri kapsamı ve raporlama farklılıkları nedeniyle tek başına salgın yönetiminin başarısını ölçmez.
 
-## • Yayılım ve Hastane Yükü
+### Yayılım ve Hastane Yükü
 #### Yayılım ve Hastane Notebook'unun Ayrıntılı Bulguları
 
-### R Değeri ve Önlem Sıkılığı
+#### R Değeri ve Önlem Sıkılığı
 
 - `reproduction_rate`, salgının yayılma hızını gösterir. `R > 1` yayılımın artma, `R < 1` ise yavaşlama eğiliminde olduğunu ifade eder.
 - R değeri 191 ülkede bulunmuştur. Her ülkenin R verisinin aktif kayıt aralığında aradaki günler eksiksizdir.
@@ -184,7 +188,7 @@ Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısınd
 - İtalya örneğinde R değeri ve önlem sıkılığı 24 Şubat 2020–31 Aralık 2022 arasında birlikte incelenmiştir.
 - Bazı dönemlerde daha yüksek önlem sıkılığı ile daha düşük R değeri birlikte gözlense de bu durum nedensellik kanıtlamaz. Aşılama, varyantlar, test kapasitesi, davranış değişiklikleri ve önlemlerin gecikmeli etkisi de salgının yayılımını etkiler.
 
-## Hastane ve Yoğun Bakım Yükü
+#### Hastane ve Yoğun Bakım Yükü
 
 - `hosp_patients` ve `icu_patients`, belirli bir tarihte hastanede ve yoğun bakımda bulunan COVID-19 hasta sayılarını gösterir.
 - Hastane hasta verisi 36 ülkede, yoğun bakım hasta verisi 38 ülkede bulunmuştur. Her iki göstergeyi birlikte paylaşan ülke sayısı 32’dir.
@@ -196,14 +200,14 @@ Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısınd
 - 13 Şubat 2022 tarihinde 30 ülkenin hem hastane hem yoğun bakım verisi birlikte bulunmuştur. Bu tarihte Bulgaristan, milyon kişi başına hastane ve yoğun bakım hasta yükünde en yüksek ülkeler arasında yer almıştır.
 - Bulgaristan’daki yüksek hastane yükü, Ocak sonu ve Şubat 2022’deki yüksek vaka ve ölüm yüküyle aynı döneme denk gelmektedir. Ancak bu durum tek başına sağlık sistemi kapasitesi veya tek bir faktörle açıklanamaz.
 
-### Haftalık Yatış ve Yatak Kapasitesi Göstergeleri
+#### Haftalık Yatış ve Yatak Kapasitesi Göstergeleri
 
 - `weekly_hosp_admissions` ve `weekly_icu_admissions`, kaynak tarafından bildirilen haftalık hastane ve yoğun bakım yatış göstergeleridir.
 - Bu göstergeler yalnızca sınırlı sayıda ülkede bulunur ve ülkeler arasında günlük veya haftalık farklı kayıt sıklıklarıyla paylaşılmıştır.
 - Bu nedenle haftalık yatış göstergeleri yeniden toplanmamış, ana ülkeler arası karşılaştırmada kullanılmamıştır. Gerekirse seçili ülke detayında kaynak tarafından bildirilen değer olarak gösterilebilir.
 - `hospital_beds_per_thousand`, bin kişi başına hastane yatağı kapasitesini gösteren sabit bir ülke bilgisidir. Günlük zaman serisi olarak değil, ülke bağlam göstergesi olarak kullanılacaktır.
 
-### Dashboard Kararları
+#### Dashboard Kararları
 
 - R değeri için ülke karşılaştırması ve seçili ülke zaman grafiği sunulabilir; veri kapsamının 2023 başında bittiği belirtilmelidir.
 - Hastane ve yoğun bakım zaman grafikleri yalnızca yeterli ve kesintisiz veri bulunan ülkeler için gösterilmelidir.
@@ -231,10 +235,10 @@ Aynı ayrım ölüm verisinde de görülür. Mutlak bildirilen ölüm sayısınd
 
 Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü gösterir. İtalya örneğinde iki yük göstergesi birlikte dalgalanır; yoğun bakım eğrisi daha düşük düzeyde fakat benzer salgın dalgalarıyla hareket eder. Bu veri yalnızca hastane verisi paylaşan ülkeler için mevcuttur; boş günler sıfır kabul edilmemiştir.
 
-## • Test Verisinin Yorumu
+### Test Verisinin Yorumu
 #### Test Notebook'unun Ayrıntılı Bulguları
 
-### Veri Kapsamı ve Test Birimleri
+#### Veri Kapsamı ve Test Birimleri
 
 - `total_tests` 172 ülkede, `new_tests` 142 ülkede, `new_tests_smoothed` 169 ülkede ve `positive_rate` 162 ülkede bulunmaktadır.
 - Test birimi bilgisi 176 ülkede vardır.
@@ -242,7 +246,7 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 - Hiçbir ülkede zaman içinde birden fazla test birimi görülmemiştir. Bu nedenle her ülkenin kendi zaman serisinde test ölçüm birimi tutarlıdır.
 - Farklı test birimleri aynı ölçümü temsil etmediği için ham `total_tests` ve `new_tests` değerleri bütün ülkeler arasında doğrudan karşılaştırılmamalıdır.
 
-### Toplam ve Günlük Test Verisi
+#### Toplam ve Günlük Test Verisi
 
 - `total_tests` kümülatif test sayısında azalış görülmemiştir. Test verisi bulunan dönemlerde kümülatif toplamlar mantıksal olarak artmaktadır.
 - `total_tests` ve `new_tests` boşluklarının çoğu veri serisinin başlangıç veya bitiş döneminde bulunur. Aktif raporlama dönemindeki boşluklar sınırlıdır.
@@ -251,14 +255,14 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 - Daha seyrek raporlama yapan veya yalnızca az sayıda test kaydı bulunan ülkeler de vardır. Bu nedenle haftalık test toplamları yalnızca 7 günün tamamında `new_tests` verisi bulunan haftalar için hesaplanmıştır.
 - Eksik gün içeren haftalar sıfırla doldurulmamış, `tam_hafta` ve `veri_durumu` alanlarıyla etiketlenmiştir.
 
-### Pozitiflik Oranı ve Test/Vaka Oranı
+#### Pozitiflik Oranı ve Test/Vaka Oranı
 
 - `positive_rate` değerlerinin tamamı 0–1 aralığındadır; mantıksal sınır dışında değer bulunmamıştır.
 - Pozitiflik oranı eksikliklerinin çoğu raporlamanın başlangıç veya bitiş dönemindedir. Aktif dönem içindeki boşluklar sınırlı olduğundan seçili ülke zaman grafikleri için uygundur.
 - `tests_per_case` alanında sıfır veya negatif değer bulunmamıştır.
 - Seçili ülke örneğinde bazı dönemlerde test yoğunluğu düşerken pozitiflik oranı yükselmiştir. Bu durum testlerin daha çok riskli kişilere uygulanması, test kapasitesi veya artan bulaş ile ilişkili olabilir; grafik tek başına nedensellik göstermez.
 
-### Ülkeler Arası Karşılaştırma ve Dashboard
+#### Ülkeler Arası Karşılaştırma ve Dashboard
 
 - Pozitiflik oranı, ham test sayısına göre ülkeler arasında daha uygun bir karşılaştırma göstergesidir.
 - En fazla ortak pozitiflik oranı bulunan tarih 20 Mart 2022’dir; bu tarihte 136 ülkenin pozitiflik oranı bulunmaktadır.
@@ -279,7 +283,7 @@ Hastanede ve yoğun bakımda bulunan hasta serileri, belirli bir gündeki yükü
 
 Test yoğunluğu ve pozitiflik oranı her ülkede aynı sıklıkta bildirilmez. Bu örnek, test serisindeki değişimleri ve pozitiflik bildirimindeki kesintileri görünür kılar. Ülkeler arası test karşılaştırmalarında yalnızca `tests performed` birimi kullanan ülkeler değerlendirilir; kişi ya da örnek sayısı olarak bildiren veriler aynı ölçeği temsil etmez.
 
-## • Aşılama, Vaka ve Ölüm Eğrileri
+### Aşılama, Vaka ve Ölüm Eğrileri
 #### Aşı Notebook'unun Ayrıntılı Bulguları
 
 - Temizlenmiş ülke verileri kullanıldı. Aşı analizi, `countries_clean.csv` içindeki ülke bazlı kayıtlara dayanır.
@@ -324,43 +328,43 @@ Türkiye'de en az bir doz ve tam aşılı oranı 2021 boyunca yükselir, ardınd
 
 Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha sonra yataylaşmıştır. Vaka ve ölüm eğrileriyle aynı zaman ekseninde gösterim, dönemlerin birlikte nasıl değiştiğini açıklar. Bu görsel nedensel bir aşı etkisi kanıtı değildir; varyantlar, test düzeyi, yaş yapısı ve raporlama gibi etkenler ayrıca rol oynar.
 
-## • Demografik ve Ekonomik İlişkiler
+### Demografik ve Ekonomik İlişkiler
 #### Demografik ve Ekonomik Notebook'unun Ayrıntılı Bulguları
 
-### Veri Kalitesi ve Ülke Profili
+#### Veri Kalitesi ve Ülke Profili
 
 - Demografik, ekonomik, sağlık riski ve altyapı göstergeleri ülke bazında sabit bilgiler olarak incelenmiştir.
 - Sabit göstergelerde zaman içinde birden fazla farklı değer ve tanımlanan mantıksal sınırların dışında anormal kayıt bulunmamıştır.
 - Her ülke için tek satırlık `country_profile` tablosu oluşturulmuştur.
 - Bir ülkenin bir göstergesi eksikse, ülke yalnızca o göstergenin kullanıldığı analizden çıkarılmıştır. Tüm göstergeleri eksik olmadığı sürece ülke analizden tamamen çıkarılmamıştır.
 
-### Ölüm ve Aşılanma Karşılaştırmaları
+#### Ölüm ve Aşılanma Karşılaştırmaları
 
 - Milyon kişi başına toplam COVID-19 ölümü için en geniş ortak kapsam, 4 Ağustos 2024 tarihinde 194 ülkede bulunmuştur.
 - Tam aşılama oranı için en geniş ortak kapsam, 16 Ağustos 2021 tarihinde 106 ülkede bulunmuştur.
 - Ölüm ve aşılama göstergeleri için farklı tarihler kullanılmıştır; her gösterge kendi en geniş ülke kapsamına sahip tarihte değerlendirilmiştir.
 
-### Ana İlişkiler
+#### Ana İlişkiler
 
 - Logaritmik kişi başına GDP ile milyon kişi başına toplam COVID-19 ölümü arasında orta düzeyde pozitif ilişki görülmüştür (`r = 0.498`, 186 ülke).
 - 65 yaş üstü nüfus oranı ile milyon kişi başına toplam COVID-19 ölümü arasında güçlü pozitif ilişki görülmüştür (`r = 0.683`, 182 ülke).
 - HDI ile tam aşılama oranı arasında güçlü pozitif ilişki görülmüştür (`r = 0.741`, 105 ülke).
 - HDI düzeyi yüksek ülkelerde tam aşılama oranları genel olarak daha yüksektir. Bu ilişki; sağlık altyapısı, gelir, lojistik kapasite ve aşı erişimi gibi birlikte değişen faktörleri yansıtabilir.
 
-### Yardımcı Göstergeler
+#### Yardımcı Göstergeler
 
 - Ortanca yaş ve 70 yaş üstü nüfus oranı da milyon kişi başına toplam ölümle güçlü pozitif ilişki göstermiştir.
 - Kadın sigara oranı, el yıkama imkânı ve yaşam beklentisi bazı ülkelerde ölüm göstergesiyle pozitif ilişki göstermiştir. Bu sonuçlar doğrudan nedensel etki olarak yorumlanmamalıdır.
 - Aşırı yoksulluk oranı ile bildirilen COVID-19 ölümü arasında negatif ilişki görülmüştür. Ülkeler arası raporlama farkı, yaş yapısı, sağlık hizmetine erişim ve gelişmişlik düzeyi bu ilişkiyi etkileyebilir.
 - Diyabet yaygınlığı ve logaritmik nüfus yoğunluğu ile milyon kişi başına toplam ölüm arasında çok zayıf ilişki görülmüştür.
 
-### Korelasyon Isı Haritası
+#### Korelasyon Isı Haritası
 
 - Korelasyon ısı haritasında GDP, HDI, yaşlı nüfus oranı ve yaşam beklentisinin birbiriyle güçlü ilişkiler taşıdığı görülmüştür.
 - Isı haritasında tüm seçili göstergeleri eksiksiz bulunan 69 ülke kullanılmıştır.
 - Korelasyonlar ülke düzeyindeki birliktelikleri gösterir; bireysel risk, nedensel etki veya politika başarısı olarak yorumlanmamalıdır.
 
-### Dashboard Kararları
+#### Dashboard Kararları
 
 - Dashboard’da GDP–ölüm, 65 yaş üstü nüfus–ölüm ve HDI–tam aşılama için üç dağılım grafiği kullanılacaktır.
 - Korelasyon ısı haritası, seçili demografik ve ekonomik göstergelerin birlikte incelenmesi için kullanılacaktır.
@@ -451,7 +455,7 @@ Bu sayfa, seçilen dönemdeki ölüm yükünü vaka sayılarıyla birlikte yorum
 
 Çizgi grafik yıllara göre aylık ölümleri, sütun grafik kıtalardaki dağılımı, harita ise nüfusa göre ölüm yükünü gösterir.
 
-## • Yayılım ve Hastane
+### Yayılım ve Hastane
 
 ![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
 
@@ -548,7 +552,7 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 
 ## Önemli Hesaplama Kararları
 
-- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır. Ülke olarak veri kaynağının ülke olarak listelediği konumlar alınır.
+- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır. Veri kaynağında ülke statüsünde listelenen tüm konumlar ülke birimi olarak kabul edilir.
 - Eksik gözlemler sıfır kabul edilmez; kartlarda ve grafiklerde boş kalır.
 - Haftalık analizlerde tam hafta kuralı uygulanır.
 - Kümülatif değerler, ülkeler için son geçerli değerin alınmasıyla hesaplanır; günlük satırlar toplanmaz.
