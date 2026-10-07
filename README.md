@@ -58,25 +58,76 @@ Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha
 
 ![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
 
+Bu sayfa, seçilen dönemde vaka sayılarının nasıl değiştiğini gösterir.
+
+- **Dönemlik Yeni Vaka:** Seçilen tarihlerde bildirilen yeni vakaların toplamı.
+- **Kümülatif Vaka:** Her ülkenin ulaştığı son toplam vaka sayısı.
+- **Milyon Kişi Başına Vaka:** Toplam vakanın ülke nüfusuna göre karşılaştırılmış hâli.
+- **Eksik Gün:** Yeni vaka bilgisi olmayan gün sayısıdır; sıfır vaka anlamına gelmez.
+
+Aylık çizgi grafik salgın dalgalarını, çubuk grafik ülkeleri nüfusa göre karşılaştırır, harita ise yükün ülkeler arasındaki dağılımını gösterir.
+
 ### Ölüm Analizi
 
 ![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
+
+Bu sayfa, seçilen dönemdeki ölüm yükünü vaka sayılarıyla birlikte yorumlamaya yardım eder.
+
+- **Dönemlik Yeni Ölüm:** Seçilen tarihlerdeki yeni ölüm toplamı.
+- **Kümülatif Ölüm:** Her ülkenin son bildirilen toplam ölüm değeri.
+- **Milyon Başına Ölüm:** Ölüm yükünün nüfusa göre karşılaştırılmış hâli.
+- **Vaka Ölüm Oranı:** Kümülatif ölümün kümülatif vakaya oranı.
+
+Çizgi grafik yıllara göre aylık ölümleri, sütun grafik kıtalardaki dağılımı, harita ise nüfusa göre ölüm yükünü gösterir.
 
 ### Yayılım ve Hastane
 
 ![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
 
+Bu sayfa, salgının yayılma hızını ve sağlık sistemi üzerindeki yükü birlikte gösterir.
+
+- **R Değeri:** Bir hastanın ortalama kaç kişiye hastalığı bulaştırdığını gösterir. R 1'in üzerindeyse yayılım artma eğilimindedir.
+- **Hastane / YBÜ Verisi Veren Ülke:** Bu alanlarda en az bir kayıt paylaşan ülke sayısıdır.
+- **R Verisinin Kaynakta Bittiği Tarih:** R değerinin son bulunduğu gündür.
+
+Hastane/YBÜ seçim kutusundan gösterilecek hasta türü seçilir. Grafik, veri paylaşan ülkelerin milyon kişi başına günlük ortalamasını verir.
+
 ### Test Analizi
 
 ![Test Analizi](dashboard/screenshots/04-test-analizi.png)
+
+Bu sayfa, test yoğunluğu ve pozitiflik oranını inceler.
+
+- **Test Verisi Veren Ülke:** En az bir toplam test kaydı bulunan ülke sayısı.
+- **Ortalama Pozitiflik Oranı:** Veri paylaşan ülkelerdeki pozitiflik oranlarının ortalaması.
+- **Test Son Gözlem Tarihi:** Test verisinin kaynakta son bulunduğu tarih.
+
+Çubuk grafik bin kişi başına kümülatif testte ilk 10 ülkeyi gösterir. Test karşılaştırmasına yalnızca aynı birimde, yani yapılan test sayısı olarak veri bildiren ülkeler girer.
 
 ### Aşı Analizi
 
 ![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
 
+Bu sayfa, aşılanmanın zaman içindeki ilerleyişini yeni vaka ve ölüm eğrileriyle birlikte gösterir.
+
+- **En Az Bir Doz Oranı:** Nüfusa göre en az bir doz aşı olanların oranı.
+- **Tam Aşılı Oranı:** Nüfusa göre tam aşılı kişilerin oranı.
+- **Aşı Verisi Veren Ülke:** En az bir aşı kaydı paylaşan ülke sayısı.
+- **Yeni Vaka / Yeni Ölüm:** Seçilen tarihlerdeki toplam yeni vaka ve ölüm sayıları.
+
+Aşı oranında her ülkenin o tarihe kadarki son bilinen değeri kullanılır. Böylece o gün veri paylaşmayan ülkeler yüzünden oran yapay olarak düşmez.
+
 ### Demografik ve Ekonomik Analiz
 
 ![Demografik ve Ekonomik Analiz](dashboard/screenshots/06-demografik-ekonomik.png)
+
+Bu sayfa, ülkelerin demografik ve ekonomik göstergeleri ile milyon kişi başına ölüm yükü arasındaki ilişkiyi gösterir.
+
+- **Ortalama Yaşam Beklentisi, Kişi Başı GSYH ve Medyan Yaş:** Seçilen ülkelerin ortalama değerleri.
+- Her nokta bir ülkeyi, renkler ise kıtaları temsil eder.
+- Grafiklerde GSYH, medyan yaş ve insani gelişmişlik endeksi ile ölüm yükü birlikte incelenir.
+
+Bu noktaların yakın veya uzak olması ilişkiyi anlatır; tek başına bir göstergenin ölümlere neden olduğunu kanıtlamaz.
 
 ## Veri Kaynağı
 
