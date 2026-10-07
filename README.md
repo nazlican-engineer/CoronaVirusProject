@@ -1,49 +1,87 @@
-# COVID-19 Dashboard
+# COVID-19 Analysis Dashboard
 
-Power BI Desktop ile haz?rlanm??, ?lkeler aras? COVID-19 vaka, ?l?m, hastane, test, a??lama ve demografik g?stergeleri inceleyen etkile?imli rapor.
+SQL, Python ve Power BI kullanılarak hazırlanmış; ülkeler arasındaki COVID-19 vaka, ölüm, hastane, test, aşılama ve demografik göstergeleri inceleyen uçtan uca veri analizi projesi.
 
-## Rapor sayfalar?
+## Dashboard
 
-| Sayfa | Yan?tlad??? soru |
+Power BI raporu altı analiz sayfasından oluşur:
+
+| Sayfa | Soru |
 | --- | --- |
-| Vaka Analizi | Vakalar zaman i?inde ve ?lkeler aras?nda nas?l de?i?ti? |
-| ?l?m Analizi | ?l?mler, ?l?m oran? ve n?fusa g?re ?l?m y?k? nas?l de?i?ti? |
-| Yay?l?m ve Hastane | R de?eri ile hastane/YB? g?stergeleri nas?l seyretti? |
-| Test Analizi | Test yo?unlu?u ve pozitiflik oran? nas?l de?i?ti? |
-| A?? Analizi | A??lanma, vaka ve ?l?m e?rileriyle birlikte nas?l ilerledi? |
-| Demografik ve Ekonomik Analiz | Sa?l?k y?k?, demografik ve ekonomik g?stergelerle nas?l ili?kilendi? |
+| Vaka Analizi | Vakalar zaman içinde ve ülkeler arasında nasıl değişti? |
+| Ölüm Analizi | Ölümler, ölüm oranı ve nüfusa göre ölüm yükü nasıl değişti? |
+| Yayılım ve Hastane | R değeri ile hastane/YBÜ göstergeleri nasıl seyretti? |
+| Test Analizi | Test yoğunluğu ve pozitiflik oranı nasıl değişti? |
+| Aşı Analizi | Aşılanma, vaka ve ölüm eğrileriyle birlikte nasıl ilerledi? |
+| Demografik ve Ekonomik Analiz | Sağlık yükü, demografik ve ekonomik göstergelerle nasıl ilişkilendi? |
 
-## Kullan?m
+> Ekran görüntüleri eklendiğinde burada `dashboard/screenshots/` altından gösterilecektir.
 
-Her sayfada ayn? ?? dilimleyici bulunur:
+## Teknolojiler
 
-- **K?ta**: `continent`
-- **?lke**: `location`
-- **Zaman Aral???**: `Takvim[Date]`
+- **Python:** veri inceleme, temizlik ve analiz notebook'ları
+- **PostgreSQL / SQL:** şema, tablo tanımları ve analiz sorguları
+- **Power BI:** etkileşimli rapor, DAX ölçüleri ve filtreler
 
-Bu dilimleyiciler rapor sayfalar? aras?nda senkronlan?r. Tek ?lke se?imi, o ?lkenin veri kapsad??? g?rselleri g?nceller; kaynakta ilgili g?sterge bulunmuyorsa de?er s?f?r yerine bo? g?r?n?r.
+## Veri Kaynağı
 
-## Veri ve model
+Veri, [Our World in Data COVID-19 veri sayfasından](https://ourworldindata.org/coronavirus) alınır. Our World in Data tarafından üretilen veri ve görselleştirmeler, atıf koşuluyla CC BY lisansındadır; üçüncü taraf kaynaklı alanların kendi lisansları ayrıca kontrol edilmelidir.
 
-- Ana tablo: `countries_clean`
-- Takvim tablosu: `Takvim`
-- ?li?ki: `Takvim[Date]` ? `countries_clean[date]`
-- Power BI raporu: `dashboard/covid19_dashboard.pbix`
+## Proje Akışı
 
-K?m?latif vaka, ?l?m ve test de?erleri ?lkelerin son bildirilen toplamlar?n?n toplanmas?yla hesaplan?r. G?nl?k metrikler se?ili tarih aral???ndaki bildirilen de?erleri toplar. ?lke n?fuslar?na g?re kar??la?t?r?lan de?erlerde milyon ki?i ba??na oranlar kullan?l?r.
+```text
+Ham veri → veri denetimi ve temizleme → haftalık / analiz tabloları
+        → PostgreSQL sorguları → Power BI dashboard
+```
 
-## Veri kalitesi ilkeleri
+## Klasör Yapısı
 
-- Bo? kay?tlar **s?f?r kabul edilmez**.
-- Hastane, YB?, test ve R g?stergelerinde ?lkelerin veri kapsam? farkl?d?r.
-- R verisi kaynakta **02.01.2023** tarihinde biter.
-- Test verisi kaynakta **23.06.2022** tarihinde biter.
-- Test s?ralamas? yaln?z `tests performed` birimini kullanan ?lkeleri i?erir.
-- A?? oran? zaman serileri, farkl? g?nlerde raporlama yapan ?lkelerin son bilinen de?erleriyle hesaplan?r.
-- G?rseller ili?kiyi g?sterir; tek ba??na neden-sonu? kan?t? de?ildir.
+```text
+covid-analysis/
+├── README.md
+├── LICENSE
+├── .gitignore
+├── pyproject.toml
+├── src/              # data_loader.py
+├── notebooks/        # denetim, temizlik ve analiz notebook'ları
+├── sql/              # şema ve analiz sorguları
+├── dashboard/        # .pbix, tema ve ekran görüntüleri
+├── docs/             # ölçüler, doğrulamalar ve metodoloji notları
+├── data/             # yalnızca README.md ve .gitkeep sürüm kontrolünde
+└── outputs/          # yerel üretilen tablolar ve görseller
+```
 
-## Do?rulama
+## Kurulum ve Çalıştırma
 
-Rapor; t?m ?lkeler, tek ?lke, tarih aral??? ve eksik kay?t senaryolar?yla kontrol edilir. ?rnek olarak Afghanistan se?ildi?inde hastane/YB? verisi bo? kal?rken R, vaka, ?l?m, test, a?? ve demografik g?rseller ilgili ?lkeye g?re g?ncellenir.
+1. Depoyu klonlayın ve Python ortamını oluşturun.
+2. Bağımlılıkları `pyproject.toml` üzerinden kurun.
+3. Kaynak veriyi `data/raw/` altına yerel olarak indirin.
+4. Önce `notebooks/data_audit_cleaning.ipynb` notebook'unu çalıştırın.
+5. Diğer notebook'ları analiz sırasına göre çalıştırın.
+6. Power BI içinde `dashboard/covid19_dashboard.pbix` dosyasını açın; veri kaynağı yolunu kendi yerel `data/processed/` klasörünüze göre güncelleyin.
 
-Sayfa bazl? y?ntem ve do?rulama notlar? `docs/powerbi` klas?r?ndedir.
+Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına bakın.
+
+## Önemli Hesaplama Kararları
+
+- Tayvan, Kosova, Hong Kong ve Filistin analizde ayrı ülke birimleri olarak ele alınır.
+- Eksik gözlemler sıfır kabul edilmez; kartlarda ve grafiklerde boş kalır.
+- Haftalık analizlerde tam hafta kuralı uygulanır.
+- Kümülatif değerler, ülkeler için son geçerli değerin alınmasıyla hesaplanır; günlük satırlar toplanmaz.
+- Oranlar ve kişi başına değerler ülkeler arasında doğrudan toplanmaz; ölçüye uygun ağırlıklı ya da ülke ortalaması yaklaşımı kullanılır.
+- Demografik grafikler ülke düzeyindedir; ilişkiler nedensellik kanıtı değildir.
+
+## Sınırlamalar
+
+- R değeri kaynağı 02.01.2023 tarihinde sona erer.
+- Hastane ve YBÜ göstergeleri yalnızca veri paylaşan birkaç düzine ülkeyi kapsar.
+- Test ve aşı serilerinde bildirim farkları, eksik günler ve geriye dönük düzeltmeler bulunabilir.
+- Ülkeler arası karşılaştırmalarda veri kalitesi ile raporlama kapsamı sonuçları etkileyebilir.
+
+## Planlanan
+
+Tahmin sayfası henüz eklenmemiştir. Gelecek çalışmada zaman serisi tahminleri ve model değerlendirmesi eklenebilir.
+
+## Lisans
+
+Kod ve proje dokümantasyonu [MIT License](LICENSE) ile sunulur. Veri kullanımında kaynak lisansları ayrıca geçerlidir.
