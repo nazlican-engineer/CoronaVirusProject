@@ -15,7 +15,32 @@ Power BI raporu altı analiz sayfasından oluşur:
 | Aşı Analizi | Aşılanma, vaka ve ölüm eğrileriyle birlikte nasıl ilerledi? |
 | Demografik ve Ekonomik Analiz | Sağlık yükü, demografik ve ekonomik göstergelerle nasıl ilişkilendi? |
 
-> Ekran görüntüleri eklendiğinde burada `dashboard/screenshots/` altından gösterilecektir.
+## Dashboard Görselleri
+
+### Vaka Analizi
+
+![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
+
+### Ölüm Analizi
+
+![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
+
+### Yayılım ve Hastane
+
+![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
+
+### Test Analizi
+
+![Test Analizi](dashboard/screenshots/04-test-analizi.png)
+
+### Aşı Analizi
+
+![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
+
+### Demografik ve Ekonomik Analiz
+
+![Demografik ve Ekonomik Analiz](dashboard/screenshots/06-demografik-ekonomik.png)
+
 
 ## Teknolojiler
 
