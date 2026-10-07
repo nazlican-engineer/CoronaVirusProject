@@ -16,15 +16,6 @@ Amaç; vaka, ölüm, test, aşılama, hastane ve demografik göstergeleri aynı 
 
 ---
 
-## Nerede Yardımcı Olur?
-
-- Toplam değerler ile milyon kişi başına değerler arasındaki farkı görmeye ve ülkeleri daha adil karşılaştırmaya yardımcı olur.
-- Eksik kayıtları sıfır kabul etmeden haftalık vaka ve ölüm eğilimlerini yorumlamayı destekler.
-- Test, aşılama ve hastane verilerinin kapsam farklarını görünür kılar.
-- Power BI dashboard'undaki Kıta, Ülke ve Tarih filtreleriyle belirli bir soru veya döneme odaklanmayı kolaylaştırır.
-
----
-
 ## Proje Özeti
 
 Bu proje COVID-19 verisini ülke düzeyinde iki ölçekte inceler:
