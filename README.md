@@ -2,46 +2,6 @@
 
 SQL, Python ve Power BI kullanılarak hazırlanmış; ülkeler arasındaki COVID-19 vaka, ölüm, hastane, test, aşılama ve demografik göstergeleri inceleyen uçtan uca veri analizi projesi.
 
-## Dashboard
-
-Power BI raporu altı analiz sayfasından oluşur:
-
-| Sayfa | Soru |
-| --- | --- |
-| Vaka Analizi | Vakalar zaman içinde ve ülkeler arasında nasıl değişti? |
-| Ölüm Analizi | Ölümler, ölüm oranı ve nüfusa göre ölüm yükü nasıl değişti? |
-| Yayılım ve Hastane | R değeri ile hastane/YBÜ göstergeleri nasıl seyretti? |
-| Test Analizi | Test yoğunluğu ve pozitiflik oranı nasıl değişti? |
-| Aşı Analizi | Aşılanma, vaka ve ölüm eğrileriyle birlikte nasıl ilerledi? |
-| Demografik ve Ekonomik Analiz | Sağlık yükü, demografik ve ekonomik göstergelerle nasıl ilişkilendi? |
-
-## Dashboard Görselleri
-
-### Vaka Analizi
-
-![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
-
-### Ölüm Analizi
-
-![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
-
-### Yayılım ve Hastane
-
-![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
-
-### Test Analizi
-
-![Test Analizi](dashboard/screenshots/04-test-analizi.png)
-
-### Aşı Analizi
-
-![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
-
-### Demografik ve Ekonomik Analiz
-
-![Demografik ve Ekonomik Analiz](dashboard/screenshots/06-demografik-ekonomik.png)
-
-
 ## Notebook Bulguları
 
 Notebook'lar, dashboard'da özetlenen ölçülerin veri kalitesi kontrollerini ve ülke karşılaştırmalarını ayrıntılandırır. Aşağıdaki görseller bu analizlerden seçilmiştir.
@@ -80,12 +40,31 @@ Türkiye'de en az bir doz ve tam aşılama oranı 2021 boyunca yükselmiş, daha
 
 Ülke düzeyindeki korelasyon analizinde log kişi başı GSYH ile milyon kişi başına ölüm arasında orta düzeyde pozitif ilişki görüldü (`r = 0.498`, 186 ülke). 65 yaş üstü nüfus oranı ile milyon kişi başına ölüm ilişkisi daha güçlüydü (`r = 0.683`, 182 ülke). HDI ile tam aşılama oranı arasında da güçlü pozitif ilişki vardı (`r = 0.741`, 105 ülke). Bu ilişkiler nedensellik göstermez; birlikte değişen sosyal, demografik ve raporlama faktörleri sonuçları etkileyebilir.
 
+## Dashboard Görselleri
 
-## Teknolojiler
+### Vaka Analizi
 
-- **Python:** veri inceleme, temizlik ve analiz notebook'ları
-- **PostgreSQL / SQL:** şema, tablo tanımları ve analiz sorguları
-- **Power BI:** etkileşimli rapor, DAX ölçüleri ve filtreler
+![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
+
+### Ölüm Analizi
+
+![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
+
+### Yayılım ve Hastane
+
+![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
+
+### Test Analizi
+
+![Test Analizi](dashboard/screenshots/04-test-analizi.png)
+
+### Aşı Analizi
+
+![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
+
+### Demografik ve Ekonomik Analiz
+
+![Demografik ve Ekonomik Analiz](dashboard/screenshots/06-demografik-ekonomik.png)
 
 ## Veri Kaynağı
 
@@ -97,6 +76,12 @@ Veri, [Our World in Data COVID-19 veri sayfasından](https://ourworldindata.org/
 Ham veri → veri denetimi ve temizleme → haftalık / analiz tabloları
         → PostgreSQL sorguları → Power BI dashboard
 ```
+
+## Teknolojiler
+
+- **Python:** veri inceleme, temizlik ve analiz notebook'ları
+- **PostgreSQL / SQL:** şema, tablo tanımları ve analiz sorguları
+- **Power BI:** etkileşimli rapor, DAX ölçüleri ve filtreler
 
 ## Klasör Yapısı
 
@@ -141,10 +126,6 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 - Hastane ve YBÜ göstergeleri yalnızca veri paylaşan birkaç düzine ülkeyi kapsar.
 - Test ve aşı serilerinde bildirim farkları, eksik günler ve geriye dönük düzeltmeler bulunabilir.
 - Ülkeler arası karşılaştırmalarda veri kalitesi ile raporlama kapsamı sonuçları etkileyebilir.
-
-## Planlanan
-
-Tahmin sayfası henüz eklenmemiştir. Gelecek çalışmada zaman serisi tahminleri ve model değerlendirmesi eklenebilir.
 
 ## Lisans
 
