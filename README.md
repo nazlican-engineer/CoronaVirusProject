@@ -188,3 +188,7 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 - Hastane ve YBÜ göstergeleri yalnızca veri paylaşan birkaç düzine ülkeyi kapsar.
 - Test ve aşı serilerinde bildirim farkları, eksik günler ve geriye dönük düzeltmeler bulunabilir.
 - Ülkeler arası karşılaştırmalarda veri kalitesi ile raporlama kapsamı sonuçları etkileyebilir.
+
+## Lisans
+
+Bu proje [MIT License](LICENSE) ile lisanslanmıştır.
