@@ -24,7 +24,7 @@ The dashboard is in `dashboard/covid19_dashboard.pbix` and opens with Power BI D
 
 COVID-19 data is reported at different frequencies, to different extents, and sometimes underreported across countries. This project was prepared to make country comparisons more meaningful by taking into account data quality and measurement definition rather than basing them directly on total numbers.
 
-Aim; Examining case, death, test, vaccination, hospital and demographic indicators in the same analysis flow; The aim is to present total numbers together with values ​​according to population and to make it visible within which data limits the results should be interpreted.
+This project analyzes case, death, testing, vaccination, hospital, and demographic indicators in one workflow. It presents total figures alongside population-adjusted values and shows the data limits that should be considered when interpreting the results.
 
 ---
 
@@ -35,9 +35,9 @@ This project examines COVID-19 data at the country level at two scales:
 | Scale | What does it say? |
 |---|---|
 | **Absolute values** | Total cases, total deaths and new records in a certain period |
-| **Values ​​by population** | Cases, deaths, hospital and intensive care burden per million population |
+| **Values by population** | Cases, deaths, hospital and intensive care burden per million population |
 
-This distinction is important. Countries with large populations may stand out in total numbers; Country rankings may vary when using values ​​per million people. Continent, Country, and Date filters in the Dashboard narrow this comparison across all pages.
+This distinction is important. Countries with large populations may stand out in total numbers; Country rankings may vary when using values per million people. Continent, Country, and Date filters in the Dashboard narrow this comparison across all pages.
 
 ---
 
@@ -56,7 +56,7 @@ This distinction is important. Countries with large populations may stand out in
 
 ## Notebook Guide
 
-| File | Purpose | The highlight of the analysis |
+| File | Purpose | Key point |
 |---|---|---|
 | [data_audit_cleaning.ipynb](notebooks/data_audit_cleaning.ipynb) | Audits raw data, separates locations, and creates the cleaned country table. | Duplicate country-date records are deduplicated only when populated values do not conflict. |
 | [cases_analysis.ipynb](notebooks/cases_analysis.ipynb) | Analyzes cases, weekly changes, missing days, and cases per million. | Missing days are not zero; incomplete weeks are excluded from cross-country comparisons. |
@@ -91,7 +91,7 @@ We used only full week data in the weekly results. If a country is missing a day
 
 - First, the highest global weeks for cases and deaths were found.
 - In the same week, the share of countries in the world total was calculated.
-- Besides absolute totals, values ​​per million people were also listed; thus reducing the population impact.
+- Besides absolute totals, values per million people were also listed; thus reducing the population impact.
 - Countries with a population of at least 1 million were used in some peak comparisons to reduce very small countries being disrupted by extreme values.
 - China's unusual week of cases in December 2022 was first examined individually, then a global comparison was made excluding China.
 - Sudden death spikes in Chile and Ecuador were checked with daily records.
@@ -118,12 +118,12 @@ Countries were divided into low, medium and high groups according to the full va
 
 ![Vaka Analizi](dashboard/screenshots/01-vaka-analizi.png)
 
-This page shows how case numbers have changed over the selected period.
+This page shows case trends for the selected period.
 
-- **Seasonal New Case:** The total of new cases reported on the selected dates.
-- **Cumulative Cases:** The latest total number of cases reached by each country.
-- **Cases Per Million People:** Total cases compared to the country's population.
-- **Missing Days:** The number of days without new case information; It does not mean zero cases.
+- **Period New Cases (Dönemlik Yeni Vaka):** The total number of new cases reported during the selected period.
+- **Cumulative Cases:** The latest reported total number of cases for each country.
+- **Cases per Million (Milyon Kişi Başına Vaka):** Total cases adjusted for each country's population.
+- **Missing Days:** The number of days with no new case data. It does not mean zero cases.
 
 The monthly line chart compares epidemic waves, the bar chart compares countries by population, and the map shows the distribution of the burden among countries.
 
@@ -131,20 +131,20 @@ The monthly line chart compares epidemic waves, the bar chart compares countries
 
 ![Death Analysis](dashboard/screenshots/02-olum-analizi.png)
 
-This page helps interpret the death burden in the selected period along with the number of cases.
+This page shows the death burden for the selected period alongside case data.
 
-- **Seasonal New Deaths:** Total of new deaths for the selected dates.
-- **Cumulative Death:** The last reported total death value of each country.
-- **Deaths per Million:** Comparison of the burden of death according to population.
+- **Period New Deaths (Dönemlik Yeni Ölüm):** The total number of new deaths reported during the selected period.
+- **Cumulative Deaths (Kümülatif Ölüm):** The latest reported total death value for each country.
+- **Deaths per Million (Milyon Başına Ölüm):** Death burden adjusted for population.
 - **Case Fatality Rate:** The ratio of cumulative deaths to cumulative cases.
 
 The line chart shows monthly deaths by year, the column chart shows the distribution in continents, and the map shows the burden of death by population.
 
-### Propagation and Hospital
+### Spread and Hospital
 
 ![Spread and Hospital](dashboard/screenshots/03-yayilim-hastane.png)
 
-This page shows the spread of the epidemic together with the burden on the healthcare system.
+This page shows disease spread alongside pressure on the healthcare system.
 
 - **R Value:** It shows how many people a patient infects on average. If R is above 1, the spread tends to increase.
 - **Country Providing Hospital / ICU Data:** It is the number of countries that share at least one record in these fields.
@@ -164,11 +164,11 @@ This page examines testing intensity and positivity rate.
 
 The bar chart shows the top 10 countries in cumulative testing per thousand people. Only countries that report data in the same unit, i.e. the number of tests performed, are included in the testing comparison.
 
-### Vaccine Analysis
+### Vaccination Analysis
 
 ![Vaccination Analysis](dashboard/screenshots/05-asi-analizi.png)
 
-This page shows vaccination progress over time, along with new case and death curves.
+This page shows vaccination progress alongside new case and death trends.
 
 - **At least One Dose Rate:** The rate of those who have at least one dose of vaccine according to the population.
 - **Fully Vaccinated Rate:** The rate of fully vaccinated people according to the population.
@@ -183,7 +183,7 @@ The last known value of each country up to that date is used in the vaccination 
 
 This page shows the relationship between countries' demographic and economic indicators and the burden of death per million people.
 
-- **Average Life Expectancy, GDP Per Capita and Median Age:** Average values ​​of selected countries.
+- **Average Life Expectancy, GDP Per Capita and Median Age:** Average values of selected countries.
 - Each dot represents a country and the colors represent continents.
 - In the graphs, GDP, median age, human development index and death burden are examined together.
 
@@ -211,17 +211,18 @@ Raw data → data audit and cleaning → weekly / analysis tables
 ## Folder Structure
 
 ```text
-covid-analysis/
-├── README.md
-├── .gitignore
-├── pyproject.toml
-├── src/ # data_loader.py
-├── notebooks/ # inspection, cleaning and analysis notebooks
-├── sql/ # schema and analysis queries
-├── dashboard/ # .pbix, theme and screenshots
-├── docs/ # metrics, validations and methodology notes
-├── data/ # only in README.md version control
-└── outputs/ # locally produced charts and images
+CoronaVirusProject/
+??? README.md
+??? .gitignore
+??? pyproject.toml
+??? src/ # data_loader.py
+??? notebooks/ # inspection, cleaning and analysis notebooks
+??? sql/ # schema and analysis queries
+??? dashboard/ # .pbix, theme and screenshots
+?   ??? demo/ # dashboard walkthrough video
+??? docs/ # metrics, validations and methodology notes
+??? data/ # data setup instructions only; raw data is not versioned
+??? outputs/ # locally produced charts and images
 ```
 
 ## Installation and Operation
@@ -240,8 +241,8 @@ For data placement details, see [data/README.md](data/README.md).
 - Taiwan, Kosovo, Hong Kong and Palestine are treated as separate country units in the analysis. All locations listed with country status in the data source are considered country units.
 - Missing observations are not considered zero; remains blank on cards and charts.
 - In weekly analysis, the full week rule is applied.
-- Cumulative values ​​are calculated by taking the last valid value for countries; daily lines are not collected.
-- Rates and per capita values ​​are not directly aggregated across countries; A conservatively weighted or country average approach is used.
+- Cumulative values are calculated by taking the last valid value for countries; daily lines are not collected.
+- Rates and per capita values are not directly aggregated across countries; A conservatively weighted or country average approach is used.
 - Demographic charts are at country level; relationships are not evidence of causation.
 
 ## Limitations
@@ -251,6 +252,6 @@ For data placement details, see [data/README.md](data/README.md).
 - There may be reporting differences, missing days and retrospective corrections in test and vaccine series.
 - In cross-country comparisons, data quality and reporting scope may affect the results.
 
-## Licence
+## License
 
 This project is licensed under the [MIT License](LICENSE).
