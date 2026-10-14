@@ -39,18 +39,18 @@ Case Analysis Procedures and Findings
 - Cumulative case values over the weekend have been added. The total_cases value of each country on Sunday was taken. Cumulative values were not collected weekly; It was left missing when the Sunday value was unavailable.
 - A weekly output table was prepared for the dashboard. Current case total, data coverage, weekly changes, case value by population and weekend cumulative total were combined in the same table.
 
-![Vaka karşılaştırması](figures/01-vaka-karsilastirma.png)
+![Vaka karşılaştırması](../docs/figures/01-vaka-karsilastirma.png)
 #### Case Curves in Türkiye
 
-![Türkiye haftalık yeni vaka](figures/01a-turkiye-haftalik-vaka.png)
+![Türkiye haftalık yeni vaka](../docs/figures/01a-turkiye-haftalik-vaka.png)
 
 The weekly number of new cases in Türkiye reached its highest level at the beginning of 2022. If the series approaches zero after 2023, this indicates the end of regular case reporting in this period; It does not mean zero cases.
 
-![Türkiye kümülatif vaka](figures/01b-turkiye-kumulatif-vaka.png)
+![Türkiye kümülatif vaka](../docs/figures/01b-turkiye-kumulatif-vaka.png)
 
 The cumulative incidence curve only moves upward. Periods when the curve steepens are waves in which new case notifications accelerate.
 
-![Milyon kişi başına haftalık vaka](figures/01d-haftalik-vaka-milyon-basina.png)
+![Milyon kişi başına haftalık vaka](../docs/figures/01d-haftalik-vaka-milyon-basina.png)
 
 In the week of 8–14 May 2023, countries with small populations, especially Brunei, are at the top in weekly cases per million people. This visual shows that the total count and the measure by population produce different rankings.
 
@@ -93,18 +93,18 @@ The United States, China, and India are highlighted in the total number of cases
 
 - Excess mortality data was not included in the analysis of this project because it was not included in the dashboard plan.
 
-![Ölüm karşılaştırması](figures/02-olum-karsilastirma.png)
+![Ölüm karşılaştırması](../docs/figures/02-olum-karsilastirma.png)
 #### Death Curves in Türkiye
 
-![Türkiye haftalık yeni ölüm](figures/02a-turkiye-haftalik-olum.png)
+![Türkiye haftalık yeni ölüm](../docs/figures/02a-turkiye-haftalik-olum.png)
 
 The weekly new death chart in Türkiye separates weeks with full weeks and weeks with missing days. The highest waves of deaths occur in 2021 and early 2022.
 
-![Türkiye kümülatif ölüm](figures/02b-turkiye-kumulatif-olum.png)
+![Türkiye kümülatif ölüm](../docs/figures/02b-turkiye-kumulatif-olum.png)
 
 Rapid rises in the cumulative mortality curve are associated with epidemic waves. The recent flattening indicates a decrease in the increase in the number of reported deaths.
 
-![Milyon kişi başına haftalık ölüm](figures/02d-haftalik-olum-milyon-basina.png)
+![Milyon kişi başına haftalık ölüm](../docs/figures/02d-haftalik-olum-milyon-basina.png)
 
 A ranking of new deaths per million people for the week of June 19–25, 2023 highlights different countries from the total number of deaths. Therefore, it is necessary to examine the burden of death according to population.
 
@@ -153,18 +153,18 @@ The same distinction is seen in mortality data. While countries with large popul
 - Days with no data will not be considered zero and will be preserved as spaces in the graphs.
 - There is no need to create a separate processed CSV for this section; dashboard can use daily indicators from `countries_clean.csv` file.
 
-![İtalya'da hastane ve yoğun bakım yükü](figures/03-italya-hastane-yogun-bakim.png)
+![İtalya'da hastane ve yoğun bakım yükü](../docs/figures/03-italya-hastane-yogun-bakim.png)
 #### Additional Images for Spread and Hospital
 
-![İtalya R değeri ve önlem sıkılığı](figures/03b-italya-r-ve-onlem.png)
+![İtalya R değeri ve önlem sıkılığı](../docs/figures/03b-italya-r-ve-onlem.png)
 
 In the Italian example, the R value and the stringency of measures are seen on the same time axis. An R value above the 1 line indicates that the spread tends to increase; This graph alone does not prove the effectiveness of the measures.
 
-![Ülkelere göre R değeri](figures/03c-r-degeri-ulke-karsilastirma.png)
+![Ülkelere göre R değeri](../docs/figures/03c-r-degeri-ulke-karsilastirma.png)
 
 On January 2, 2023, Kosovo, Bolivia, and Lebanon are among the highest R values. The dashed line indicates the threshold R = 1.
 
-![Hastane ve yoğun bakım yükü](figures/03d-hastane-ybu-karsilastirma.png)
+![Hastane ve yoğun bakım yükü](../docs/figures/03d-hastane-ybu-karsilastirma.png)
 
 On February 13, 2022, Bulgaria, Serbia and Romania stand out in the number of hospitalized people. Since hospital and intensive care burdens are shown per million people, countries can be compared.
 
@@ -209,10 +209,10 @@ Series of patients in hospital and intensive care show the burden on a given day
 - `weekly_tests.csv` table has been created for Dashboard. The weekly test card should only be used on records where `full_week=True`.
 - The test unit, data status and last observation date should be displayed to the user on the dashboard.
 
-![Birleşik Arap Emirlikleri test ve pozitiflik serisi](figures/04-bae-test-pozitiflik.png)
+![Birleşik Arap Emirlikleri test ve pozitiflik serisi](../docs/figures/04-bae-test-pozitiflik.png)
 #### Positivity Rate Comparison
 
-![En yüksek test pozitiflik oranları](figures/04b-pozitiflik-orani-karsilastirma.png)
+![En yüksek test pozitiflik oranları](../docs/figures/04b-pozitiflik-orani-karsilastirma.png)
 
 On March 20, 2022, the highest positivity rates are seen in Georgia and the Netherlands. The positivity rate should be interpreted in conjunction with testing intensity and reporting scope.
 
@@ -250,14 +250,14 @@ Test intensity and positivity rate are not reported with the same frequency in e
 
 - `weekly_vaccinations.csv` table was created for Dashboard. Table; includes weekly vaccination rates, actual observation date, observation delay, and data status.
 
-![Türkiye'de aşılama, vaka ve ölüm eğilimleri](figures/05-turkiye-asi-vaka-olum.png)
+![Türkiye'de aşılama, vaka ve ölüm eğilimleri](../docs/figures/05-turkiye-asi-vaka-olum.png)
 #### Vaccine Scope and Progress
 
-![Ülkelere göre aşı kapsamı](figures/05a-asi-kapsami-karsilastirma.png)
+![Ülkelere göre aşı kapsamı](../docs/figures/05a-asi-kapsami-karsilastirma.png)
 
 For the week of September 6–12, 2021, the United Arab Emirates and Qatar are at the top of the list in terms of fully vaccinated rates with at least one dose. Blue bar indicates at least one dose, green bar indicates fully vaccinated rate.
 
-![Türkiye aşı ilerleyişi](figures/05b-turkiye-asi-ilerlemesi.png)
+![Türkiye aşı ilerleyişi](../docs/figures/05b-turkiye-asi-ilerlemesi.png)
 
 The rate of at least one dose and fully vaccinated in Türkiye increases throughout 2021 and then flattens out. Gaps in the series are missing data; It does not mean zero vaccination.
 
@@ -309,10 +309,10 @@ The rate of at least one dose and full vaccination in Türkiye increased through
 - Each dot in the graphs represents a country.
 - Regression or prediction model is not included in the scope of this project.
 
-![Demografik, ekonomik ve COVID-19 korelasyonları](figures/06-demografik-korelasyon.png)
+![Demografik, ekonomik ve COVID-19 korelasyonları](../docs/figures/06-demografik-korelasyon.png)
 #### Demographic Scatter Plots
 
-![Demografik ve ekonomik göstergeler](figures/06a-demografik-dagilim.png)
+![Demografik ve ekonomik göstergeler](../docs/figures/06a-demografik-dagilim.png)
 
 These three scatter plots show the relationship between GDP per capita, population over 65, and HDI and deaths per million people. Each point is a country. A concentration of points indicates that there are more countries with similar values.
 
