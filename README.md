@@ -45,12 +45,12 @@ This distinction is important. Countries with large populations may stand out in
 
 | Topic | Brief finding | Detail |
 |---|---|---|
-| Vaka | Toplam vakada ABD, Çin ve Hindistan öne çıkar; nüfusa göre hesaplama sıralamayı değiştirir. | [Vaka analizi](notebooks/cases_analysis.ipynb) |
-| Ölüm | Büyük nüfuslu ülkeler toplam ölümde öne çıkar; milyon kişi başına ölçü farklı ülkeleri öne taşır. | [Ölüm analizi](notebooks/deaths_analysis.ipynb) |
-| Yayılım | R > 1 yayılımın artma eğiliminde olduğunu gösterir. R serisi kaynakta 02.01.2023'te biter. | [Yayılım ve hastane](notebooks/spread_hospital_analysis.ipynb) |
-| Test | Farklı test birimleri aynı ölçü değildir. Ülkeler arası sıralamada yalnızca yapılan test sayısı kullanılır. | [Test analizi](notebooks/testing_analysis.ipynb) |
-| Aşı | Eksik aşı kaydı sıfır kabul edilmez; Türkiye'de aşı oranları 2021 boyunca yükselip sonra yataylaşır. | [Aşı analizi](notebooks/vaccination_analysis.ipynb) |
-| Demografi | Yaşlı nüfus oranı ile milyon kişi başına ölüm arasında pozitif ilişki görülür; bu nedensellik değildir. | [Demografik analiz](notebooks/demographic_economic_analysis.ipynb) |
+| Cases | The United States, China, and India lead in total cases; population adjustment changes the ranking. | [Case analysis](notebooks/cases_analysis.ipynb) |
+| Deaths | Large-population countries lead in total deaths; deaths per million highlight different countries. | [Death analysis](notebooks/deaths_analysis.ipynb) |
+| Spread | R > 1 indicates increasing spread. The R series ends in the source on 02.01.2023. | [Spread and hospital analysis](notebooks/spread_hospital_analysis.ipynb) |
+| Testing | Different test units are not the same measure. Cross-country rankings use only tests performed. | [Testing analysis](notebooks/testing_analysis.ipynb) |
+| Vaccination | Missing vaccination records are not treated as zero; vaccination rates in Türkiye rose during 2021 and later levelled off. | [Vaccination analysis](notebooks/vaccination_analysis.ipynb) |
+| Demographics | The share of the population aged 65+ has a positive relationship with deaths per million; this does not show causality. | [Demographic analysis](notebooks/demographic_economic_analysis.ipynb) |
 
 ---
 
@@ -58,26 +58,26 @@ This distinction is important. Countries with large populations may stand out in
 
 | File | Purpose | The highlight of the analysis |
 |---|---|---|
-| [data_audit_cleaning.ipynb](notebooks/data_audit_cleaning.ipynb) | Ham veriyi denetler, konumları ayırır ve temiz ülke tablosunu üretir. | Tekrar eden ülke-tarih kayıtları çelişki yoksa dolu değerler korunarak tekilleştirilir. |
-| [cases_analysis.ipynb](notebooks/cases_analysis.ipynb) | Vaka, haftalık değişim, eksik gün ve milyon kişi başına vaka analizi yapar. | Eksik gün sıfır sayılmaz; tam olmayan haftalar ülkeler arası karşılaştırmaya girmez. |
-| [deaths_analysis.ipynb](notebooks/deaths_analysis.ipynb) | Ölüm serilerini ve nüfusa göre ölüm yükünü inceler. | Kümülatif ölümdeki kaynak düzeltmeleri korunur; eksik günler sıfırla doldurulmaz. |
-| [spread_hospital_analysis.ipynb](notebooks/spread_hospital_analysis.ipynb) | R değeri, önlem sıkılığı, hastane ve yoğun bakım yükünü inceler. | Hastane/YBÜ verisi yalnızca kayıt paylaşan ülkeler için yorumlanır. |
-| [testing_analysis.ipynb](notebooks/testing_analysis.ipynb) | Test kapsamı, test birimi ve pozitiflik oranını inceler. | Yapılan test, test edilen kişi ve örnek sayısı aynı ölçü değildir. |
-| [vaccination_analysis.ipynb](notebooks/vaccination_analysis.ipynb) | Aşı dozları ve aşılanma oranlarını vaka/ölüm eğrileriyle inceler. | Aşı oranında her ülkenin son geçerli değeri kullanılır. |
-| [demographic_economic_analysis.ipynb](notebooks/demographic_economic_analysis.ipynb) | Demografik ve ekonomik göstergeler ile COVID-19 yükü ilişkisini inceler. | Her nokta bir ülkeyi temsil eder; korelasyon neden-sonuç kanıtı değildir. |
+| [data_audit_cleaning.ipynb](notebooks/data_audit_cleaning.ipynb) | Audits raw data, separates locations, and creates the cleaned country table. | Duplicate country-date records are deduplicated only when populated values do not conflict. |
+| [cases_analysis.ipynb](notebooks/cases_analysis.ipynb) | Analyzes cases, weekly changes, missing days, and cases per million. | Missing days are not zero; incomplete weeks are excluded from cross-country comparisons. |
+| [deaths_analysis.ipynb](notebooks/deaths_analysis.ipynb) | Analyzes death series and deaths per population. | Source corrections in cumulative deaths are retained; missing days are not filled with zero. |
+| [spread_hospital_analysis.ipynb](notebooks/spread_hospital_analysis.ipynb) | Analyzes R values, policy stringency, hospital burden, and ICU burden. | Hospital and ICU data are interpreted only for countries that report them. |
+| [testing_analysis.ipynb](notebooks/testing_analysis.ipynb) | Analyzes test coverage, test units, and positivity rates. | Tests performed, people tested, and samples tested are not the same measure. |
+| [vaccination_analysis.ipynb](notebooks/vaccination_analysis.ipynb) | Analyzes vaccine doses and vaccination rates with case and death trends. | The latest valid vaccination value is used for each country. |
+| [demographic_economic_analysis.ipynb](notebooks/demographic_economic_analysis.ipynb) | Analyzes demographic and economic indicators and COVID-19 burden. | Each point represents a country; correlation is not evidence of causality. |
 
 ---
 
-Detailed notebook findings are in [docs/notebook_findings.md](docs/notebook_findings.md).
+Detailed notebook findings are in [notebooks/notebook_findings.md](notebooks/notebook_findings.md).
 
 ## Data Validation and Analysis Approach with SQL
 
-SQL, Python ile hazırlanan temiz ve haftalık tabloların PostgreSQL içinde kontrol edilmesi ve tekrar analiz edilmesi için kullanılır. Sorguların tamamı [sql/03_analysis_queries.sql](sql/03_analysis_queries.sql) dosyasındadır.
+SQL is used to validate and reanalyze the clean and weekly tables prepared with Python in PostgreSQL. All queries are in [sql/03_analysis_queries.sql](sql/03_analysis_queries.sql).
 
 ### Table Structure
 
-- [01_create_schema.sql](sql/01_create_schema.sql), proje tablolarını ayrı bir COVID şemasında tutar.
-- [02_create_tables.sql](sql/02_create_tables.sql), günlük temiz ülke verisi ile haftalık vaka, ölüm, test ve aşı tablolarını oluşturur.
+- [01_create_schema.sql](sql/01_create_schema.sql) stores project tables in a separate COVID schema.
+- [02_create_tables.sql](sql/02_create_tables.sql) creates daily cleaned country data and weekly case, death, test, and vaccination tables.
 - In the daily countries_clean table location + date is the primary key. Thus, a second record cannot be added for the same country and date.
 - Missing day, full day, full week and data status fields are preserved in weekly tables. In this way, it is seen which records are compared with confidence in the analysis.
 
@@ -129,7 +129,7 @@ The monthly line chart compares epidemic waves, the bar chart compares countries
 
 ### Death Analysis
 
-![Ölüm Analizi](dashboard/screenshots/02-olum-analizi.png)
+![Death Analysis](dashboard/screenshots/02-olum-analizi.png)
 
 This page helps interpret the death burden in the selected period along with the number of cases.
 
@@ -142,7 +142,7 @@ The line chart shows monthly deaths by year, the column chart shows the distribu
 
 ### Propagation and Hospital
 
-![Yayılım ve Hastane](dashboard/screenshots/03-yayilim-hastane.png)
+![Spread and Hospital](dashboard/screenshots/03-yayilim-hastane.png)
 
 This page shows the spread of the epidemic together with the burden on the healthcare system.
 
@@ -166,7 +166,7 @@ The bar chart shows the top 10 countries in cumulative testing per thousand peop
 
 ### Vaccine Analysis
 
-![Aşı Analizi](dashboard/screenshots/05-asi-analizi.png)
+![Vaccination Analysis](dashboard/screenshots/05-asi-analizi.png)
 
 This page shows vaccination progress over time, along with new case and death curves.
 
@@ -193,13 +193,13 @@ Whether these points are close or far apart tells about the relationship; It doe
 
 ## Data Source
 
-Veri, [Our World in Data COVID-19 veri sayfasından](https://ourworldindata.org/coronavirus) alınır. Our World in Data tarafından üretilen veri ve görselleştirmeler, atıf koşuluyla CC BY lisansındadır; üçüncü taraf kaynaklı alanların kendi lisansları ayrıca kontrol edilmelidir.
+Data comes from the [Our World in Data COVID-19 dataset](https://ourworldindata.org/coronavirus). Our World in Data data and visualizations are available under CC BY with attribution; third-party source fields may have separate licenses.
 
 ## Project Flow
 
 ```text
 Raw data → data audit and cleaning → weekly / analysis tables
-        → PostgreSQL sorguları → Power BI dashboard
+        → PostgreSQL queries → Power BI dashboard
 ```
 
 ## Technologies
@@ -233,7 +233,7 @@ covid-analysis/
 5. Run other notebooks in analysis order.
 6. Open the `dashboard/covid19_dashboard.pbix` file in Power BI; Update the data source path to your local `data/processed/` folder.
 
-Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına bakın.
+For data placement details, see [data/README.md](data/README.md).
 
 ## Important Calculation Decisions
 
@@ -253,4 +253,4 @@ Ayrıntılı veri yerleşimi için [data/README.md](data/README.md) dosyasına b
 
 ## Licence
 
-Bu proje [MIT License](LICENSE) ile lisanslanmıştır.
+This project is licensed under the [MIT License](LICENSE).
